@@ -1,11 +1,11 @@
-# EMR Static Spark cluster
+# EMR Static HBase,Spark cluster
 module "emr" {
   # source = "git@github.com:Datatamer/terraform-aws-emr.git?ref=0.10.6"
   source = "/Users/danisim/github-repos/tmp/terraform-aws-emr"
 
   # Configurations
   create_static_cluster = true
-  release_label         = "emr-5.29.0" # spark 2.4.4
+  release_label         = "emr-5.29.0" # spark 2.4.4, hbase 1.4.10
   applications          = ["Spark", "Hbase", "Ganglia"]
   emr_config_file_path  = "./emr.json"
   additional_tags       = {}
@@ -13,12 +13,12 @@ module "emr" {
   bucket_path_to_logs   = "logs/${var.name_prefix}-cluster"
 
   # Networking
-  subnet_id  = local.subnet_ec2_a
-  vpc_id     = local.vpc_id
+  subnet_id  = var.ec2_subnet_id
+  vpc_id     = var.vpc_id
   tamr_cidrs = var.ingress_cidr_blocks
   tamr_sgs = [
     module.tamr-vm.tamr_security_groups["tamr_security_group_id"],
-    # module.tamr-es-cluster.es_security_group_id,
+    module.tamr-es-cluster.es_security_group_id,
     module.rds-postgres.rds_sg_id
   ]
 
@@ -41,11 +41,11 @@ module "emr" {
   emr_ec2_iam_policy_name       = "${var.name_prefix}-ec2-policy"
   master_instance_group_name    = "${var.name_prefix}-MasterInstanceGroup"
   core_instance_group_name      = "${var.name_prefix}-CoreInstanceGroup"
-  emr_managed_master_sg_name    = "${var.name_prefix}-EMR-Spark-Master"
-  emr_managed_core_sg_name      = "${var.name_prefix}-EMR-Spark-Core"
-  emr_additional_master_sg_name = "${var.name_prefix}-EMR-Spark-Additional-Master"
-  emr_additional_core_sg_name   = "${var.name_prefix}-EMR-Spark-Additional-Core"
-  emr_service_access_sg_name    = "${var.name_prefix}-EMR-Spark-Service-Access"
+  emr_managed_master_sg_name    = "${var.name_prefix}-EMR-Master"
+  emr_managed_core_sg_name      = "${var.name_prefix}-EMR-Core"
+  emr_additional_master_sg_name = "${var.name_prefix}-EMR-Additional-Master"
+  emr_additional_core_sg_name   = "${var.name_prefix}-EMR-Additional-Core"
+  emr_service_access_sg_name    = "${var.name_prefix}-EMR-Service-Access"
 
   # Scale
   master_group_instance_count = 1

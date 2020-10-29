@@ -13,8 +13,8 @@ module "tamr-es-cluster" {
   enforce_https                   = true
 
   # Networking
-  vpc_id     = local.vpc_id
-  subnet_ids = [local.subnet_ec2_a]
+  vpc_id     = var.vpc_id
+  subnet_ids = [var.ec2_subnet_id]
   security_group_ids = [
     // Spark
     module.emr.emr_service_access_sg_id,

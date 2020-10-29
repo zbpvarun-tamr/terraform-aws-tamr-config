@@ -19,3 +19,18 @@ variable "license_key" {
   type        = string
   description = "Tamr license key"
 }
+
+variable "vpc_id" {
+  type        = string
+  description = "VPC ID of deployment"
+}
+
+variable "ec2_subnet_id" {
+  type        = string
+  description = "Subnet ID for ElasticSearch domain, Tamr VM, EMR cluster"
+}
+
+variable "rds_subnet_group_ids" {
+  type        = list(string)
+  description = "List of at least 2 subnet IDs in different AZs"
+}

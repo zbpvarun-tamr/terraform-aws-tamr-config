@@ -4,8 +4,8 @@ module "tamr-vm" {
   ami                 = var.ami_id
   instance_type       = "m4.2xlarge"
   key_name            = module.emr_key_pair.this_key_pair_key_name
-  subnet_id           = local.subnet_ec2_a
-  vpc_id              = local.vpc_id
+  subnet_id           = var.ec2_subnet_id
+  vpc_id              = var.vpc_id
   sg_name             = "${var.name_prefix}-tamrvm-sg"
   ingress_cidr_blocks = var.ingress_cidr_blocks
   egress_cidr_blocks  = ["0.0.0.0/0"] # TODO: scope down

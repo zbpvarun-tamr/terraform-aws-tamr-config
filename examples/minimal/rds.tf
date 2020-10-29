@@ -16,13 +16,9 @@ module "rds-postgres" {
   parameter_group_name = "${var.name_prefix}-rds-postgres-pg"
   security_group_name  = "${var.name_prefix}-sg"
 
-  vpc_id = local.vpc_id
+  vpc_id = var.vpc_id
   # Network requirement: DB subnet group needs a subnet in at least two AZs
-  rds_subnet_ids = [
-    local.rds_subnet_a,
-    local.rds_subnet_b,
-    # local.rds_subnet_c
-  ]
+  rds_subnet_ids = var.rds_subnet_group_ids
 
   ingress_sg_ids = [
     module.emr.emr_service_access_sg_id,
