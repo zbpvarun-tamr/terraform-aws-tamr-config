@@ -1,8 +1,31 @@
-output "null_resource_id" {
-  value       = "${module.minimal.null_resource_id}"
-  description = "An arbitrary value that changes each time the resource is replaced."
+output "tamr-vm" {
+  value = module.tamr-vm
 }
-output "example_value" {
-  value       = "${module.minimal.example_value}"
-  description = "Example variable."
+
+output "rds-postgres" {
+  value = module.rds-postgres
+}
+
+output "rds-pw" {
+  value = random_password.rds-password
+}
+
+output "elasticsearch" {
+  value = module.tamr-es-cluster
+}
+
+output "ec2-key" {
+  value = module.emr_key_pair
+}
+
+output "private-key" {
+  value = tls_private_key.emr_private_key.private_key_pem
+}
+
+output "emr" {
+  value = module.emr
+}
+
+output "tamr-config" {
+  value = module.tamr-config.rendered
 }
