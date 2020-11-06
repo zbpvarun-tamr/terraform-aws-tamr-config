@@ -16,6 +16,7 @@ data "template_file" "tamr_config" {
     rds_pg_dbname                   = var.rds_pg_dbname,
     rds_pg_username                 = var.rds_pg_username,
     rds_pg_password                 = var.rds_pg_password,
+    rds_pg_db_port                  = var.rds_pg_db_port,
     hbase_namespace                 = var.hbase_namespace, # HBase
     tamr_data_bucket                = var.tamr_data_bucket,
     hbase_config_path               = var.hbase_config_path,

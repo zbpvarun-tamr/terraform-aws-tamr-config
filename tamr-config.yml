@@ -1,8 +1,9 @@
 ---
 # RDS
 TAMR_PERSISTENCE_DB_USER: ${rds_pg_username}
-TAMR_PERSISTENCE_DB_URL: jdbc:postgresql://${rds_pg_hostname}:5432/${rds_pg_dbname}
+TAMR_PERSISTENCE_DB_URL: jdbc:postgresql://${rds_pg_hostname}:${rds_pg_db_port}/${rds_pg_dbname}
 TAMR_PERSISTENCE_DB_PASS: ${rds_pg_password}
+TAMR_PERSISTENCE_DB_PORT: ${rds_pg_db_port}
 
 # HBase
 TAMR_REMOTE_HBASE_ENABLED: true

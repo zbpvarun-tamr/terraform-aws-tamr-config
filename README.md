@@ -32,10 +32,8 @@ This module creates:
 |------|-------------|------|---------|:--------:|
 | ephemeral\_spark\_configured | True if EMR was configured for ephemeral spark clusters. | `bool` | n/a | yes |
 | es\_domain\_endpoint | Endpoint of Elasticsearch domain. | `string` | n/a | yes |
-| rds\_pg\_dbname | RDS postgres database name. | `string` | n/a | yes |
 | rds\_pg\_hostname | Hostname of RDS postgres instance. | `string` | n/a | yes |
 | rds\_pg\_password | Master password for RDS postgres database instance. | `string` | n/a | yes |
-| rds\_pg\_username | Master username for RDS postgres database instance. | `string` | n/a | yes |
 | spark\_cluster\_log\_uri | The path to the S3 location where logs for the Spark cluster are stored. | `string` | n/a | yes |
 | spark\_emr\_cluster\_id | Spark cluster ID. | `string` | n/a | yes |
 | tamr\_data\_bucket | Name of Tamr root directory bucket. | `string` | n/a | yes |
@@ -64,6 +62,9 @@ This module creates:
 | master\_ebs\_type | Type of volumes to attach to the master nodes. Valid options are gp2, io1, standard and st1. | `string` | `""` | no |
 | master\_ebs\_volumes\_count | Number of volumes to attach to the master nodes. | `string` | `""` | no |
 | master\_instance\_type | The EC2 instance type of the master nodes. | `string` | `""` | no |
+| rds\_pg\_db\_port | The RDS postgres database port. | `number` | `5432` | no |
+| rds\_pg\_dbname | RDS postgres database name. | `string` | `"doit"` | no |
+| rds\_pg\_username | Master username for RDS postgres database instance. | `string` | `"tamr"` | no |
 | rendered\_config\_path | If provided, the populated Tamr config will be output to this path. Include a file name (E.g. /path/to/config.yml). NOTE: Any required parent directories will be created automatically, and any existing file with the given name will be overwritten. | `string` | `""` | no |
 | spark\_driver\_memory | n/a | `string` | `"5G"` | no |
 | spark\_executor\_cores | n/a | `number` | `2` | no |

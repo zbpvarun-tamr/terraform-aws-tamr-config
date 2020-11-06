@@ -14,6 +14,7 @@ module "tamr-config" {
   rds_pg_dbname   = module.rds-postgres.rds_dbname
   rds_pg_username = module.rds-postgres.rds_username
   rds_pg_password = random_password.rds-password.result
+  rds_pg_db_port  = module.rds-postgres.rds_db_port
 
   # HBase
   hbase_namespace   = "tamr"

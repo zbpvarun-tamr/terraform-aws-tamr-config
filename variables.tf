@@ -33,16 +33,24 @@ variable "rds_pg_hostname" {
 variable "rds_pg_dbname" {
   type        = string
   description = "RDS postgres database name."
+  default     = "doit"
 }
 
 variable "rds_pg_username" {
   type        = string
   description = "Master username for RDS postgres database instance."
+  default     = "tamr"
 }
 
 variable "rds_pg_password" {
   type        = string
   description = "Master password for RDS postgres database instance."
+}
+
+variable "rds_pg_db_port" {
+  type        = number
+  description = "The RDS postgres database port."
+  default     = 5432
 }
 
 #
