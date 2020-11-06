@@ -22,8 +22,8 @@ module "tamr-config" {
   hbase_config_path = module.emr-hbase.hbase_config_path
 
   # Spark
-  spark_emr_cluster_id           = module.emr-hbase.tamr_emr_cluster_id
-  spark_cluster_log_uri          = module.emr-hbase.log_uri
+  spark_emr_cluster_id           = ""
+  spark_cluster_log_uri          = "s3n://${module.s3-logs.bucket_name}/${var.path_to_spark_logs}"
   tamr_data_path                 = "tamr/unify-data"
   tamr_spark_properties_override = "[{'name' : 'sparkOverride1','executorInstances' : '2','sparkProps' : {'spark.cores.max' : '4'}},{'name' : 'sparkOverride2','driverMemory' : '4G','executorMemory' : '5G'}]"
 

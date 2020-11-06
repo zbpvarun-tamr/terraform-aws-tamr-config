@@ -79,7 +79,8 @@ variable "hbase_config_path" {
 
 variable "spark_emr_cluster_id" {
   type        = string
-  description = "Spark cluster ID."
+  description = "Spark cluster ID. Value will not be used if deployment is spinning up ephemeral Spark clusters."
+  default = ""
 }
 
 variable "spark_cluster_log_uri" {

@@ -1,6 +1,7 @@
 locals {
   ephemeral_spark_vars = {
     "TAMR_JOB_SPARK_CLUSTER" : "emr-ephemeral",
+    "TAMR_JOB_EMR_CLUSTER_ID" : "",
     "TAMR_DATASET_EMR_RELEASE" : "${var.emr_release_label}",
     "TAMR_DATASET_EMR_INSTANCE_PROFILE" : "${var.emr_instance_profile_name}",
     "TAMR_DATASET_EMR_SERVICE_ROLE" : "${var.emr_service_role_name}",

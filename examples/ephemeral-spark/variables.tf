@@ -4,6 +4,12 @@ variable "name_prefix" {
   default     = "tamr-config-test"
 }
 
+variable "path_to_spark_logs" {
+  type = string
+  description = "Path in logs bucket to store spark logs. E.g. tamr/spark-logs"
+  default = ""
+}
+
 variable "ingress_cidr_blocks" {
   type        = list(string)
   description = "List of CIDR blocks from which ingress to ElasticSearch domain, Tamr VM, Tamr Postgres instance are allowed (i.e. VPN CIDR)"
