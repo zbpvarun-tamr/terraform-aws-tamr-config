@@ -5,9 +5,9 @@ variable "name_prefix" {
 }
 
 variable "path_to_spark_logs" {
-  type = string
+  type        = string
   description = "Path in logs bucket to store spark logs. E.g. tamr/spark-logs"
-  default = ""
+  default     = ""
 }
 
 variable "ingress_cidr_blocks" {
