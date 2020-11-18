@@ -1,6 +1,6 @@
 # Ephemeral Spark cluster
 module "ephemeral-spark-sgs" {
-  source                        = "git::git@github.com:Datatamer/terraform-aws-emr.git//modules/aws-emr-sgs?ref=0.10.6"
+  source                        = "git::git@github.com:Datatamer/terraform-aws-emr.git//modules/aws-emr-sgs?ref=0.10.7"
   applications                  = ["Spark"]
   vpc_id                        = var.vpc_id
   emr_managed_master_sg_name    = "${var.name_prefix}-EMR-Spark-Master"
@@ -11,7 +11,7 @@ module "ephemeral-spark-sgs" {
 }
 
 module "ephemeral-spark-iam" {
-  source                            = "git::git@github.com:Datatamer/terraform-aws-emr.git//modules/aws-emr-iam?ref=0.10.6"
+  source                            = "git::git@github.com:Datatamer/terraform-aws-emr.git//modules/aws-emr-iam?ref=0.10.7"
   s3_bucket_name_for_logs           = module.s3-logs.bucket_name
   s3_bucket_name_for_root_directory = module.s3-data.bucket_name
   s3_policy_arns = [
@@ -27,7 +27,7 @@ module "ephemeral-spark-iam" {
 }
 
 module "ephemeral-spark-config" {
-  source                         = "git::git@github.com:Datatamer/terraform-aws-emr.git//modules/aws-emr-config?ref=0.10.6"
+  source                         = "git::git@github.com:Datatamer/terraform-aws-emr.git//modules/aws-emr-config?ref=0.10.7"
   create_static_cluster          = false
   cluster_name                   = "${var.name_prefix}-Spark-Cluster" # unused
   emr_config_file_path           = "./emr.json"

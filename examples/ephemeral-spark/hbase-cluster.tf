@@ -1,6 +1,6 @@
 # EMR Static HBase cluster
 module "emr-hbase" {
-  source = "git@github.com:Datatamer/terraform-aws-emr.git?ref=0.10.6"
+  source = "git@github.com:Datatamer/terraform-aws-emr.git?ref=0.10.7"
 
   # Configurations
   create_static_cluster = true
