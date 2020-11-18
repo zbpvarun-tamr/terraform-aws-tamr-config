@@ -1,6 +1,7 @@
-This example demonstrates a terraform-generated Tamr config for a full aws-scale out environment set up for static Spark clusters. The environment consists of:
-- static EMR deployment running both HBase and Spark
-- data bucket and logs bucket shared by both HBase and Spark
+This example demonstrates a terraform-generated Tamr config for a full aws-scale out environment set up for ephemeral Spark clusters. The environment consists of:
+- static EMR deployment running HBase
+- EMR deployment setting up infra for ephemeral Spark cluster
+- data bucket and logs bucket to be shared by static HBase cluster and ephemeral Spark clusters
 - newly-generated EC2 key pair (used by both Tamr VM and EMR EC2 instances)
 - Elasticsearch domain
 - RDS Postgres instance
@@ -36,7 +37,10 @@ No requirements.
 |------|-------------|
 | ec2-key | n/a |
 | elasticsearch | n/a |
-| emr | n/a |
+| emr-hbase | n/a |
+| ephemeral-spark-config | n/a |
+| ephemeral-spark-iam | n/a |
+| ephemeral-spark-sgs | n/a |
 | private-key | n/a |
 | rds-postgres | n/a |
 | rds-pw | n/a |
