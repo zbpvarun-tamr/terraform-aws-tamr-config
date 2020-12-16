@@ -1,6 +1,6 @@
 # EMR Static HBase,Spark cluster
 module "emr" {
-  source = "git@github.com:Datatamer/terraform-aws-emr.git?ref=0.11.0"
+  source = "git@github.com:Datatamer/terraform-aws-emr.git?ref=0.11.1"
 
   # Configurations
   create_static_cluster = true
@@ -9,7 +9,7 @@ module "emr" {
   emr_config_file_path  = "./emr.json"
   additional_tags       = {}
   enable_http_port      = true
-  bucket_path_to_logs   = "logs/${var.name_prefix}-cluster"
+  bucket_path_to_logs   = "logs/${var.name_prefix}-cluster/"
 
   # Networking
   subnet_id  = var.ec2_subnet_id
