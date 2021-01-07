@@ -55,3 +55,11 @@ module "tamr-config" {
   emr_additional_core_sg_id   = module.ephemeral-spark-sgs.emr_additional_core_sg_id
   emrfs_dynamodb_table_name   = module.ephemeral-spark-config.emrfs_dynamodb_table_name
 }
+
+# Upload the Tamr configuration to S3
+resource "aws_s3_bucket_object" "upload_tamr_config" {
+  bucket                 = module.s3-data.bucket_name
+  key                    = "tamr/tamr-config.yml"
+  content                = module.tamr-config.rendered
+  server_side_encryption = "AES256"
+}
