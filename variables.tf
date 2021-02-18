@@ -112,6 +112,12 @@ variable "spark_executor_cores" {
   default = 2
 }
 
+variable "tamr_spark_config_override" {
+  type        = string
+  description = "A list of spark config overrides. If not set all jobs will run with the default spark settings. Used for setting job-by-job spark resource settings."
+  default     = ""
+}
+
 variable "tamr_spark_properties_override" {
   type        = string
   description = "JSON blob of spark properties to override. If not set, will use a default set of properties that should work for most use cases."

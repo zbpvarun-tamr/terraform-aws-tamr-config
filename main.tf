@@ -26,6 +26,7 @@ data "template_file" "tamr_config" {
     spark_executor_instances        = var.spark_executor_instances,
     spark_executor_memory           = var.spark_executor_memory,
     spark_executor_cores            = var.spark_executor_cores,
+    tamr_spark_config_override      = var.tamr_spark_config_override,
     tamr_spark_properties_override  = var.tamr_spark_properties_override,
     es_domain_endpoint              = var.es_domain_endpoint,             # Elasticsearch
     tamr_data_path                  = var.tamr_data_path,                 # FileSystem
