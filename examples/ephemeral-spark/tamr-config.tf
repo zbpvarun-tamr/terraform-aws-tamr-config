@@ -1,5 +1,5 @@
 module "tamr-config" {
-  #   source = "git::git@github.com:Datatamer/terraform-aws-tamr-config?ref=0.1.0"
+  #   source = "git::git@github.com:Datatamer/terraform-aws-tamr-config?ref=0.1.1"
   source = "../.."
 
   config_template_path       = "../../tamr-config.yml"
@@ -25,7 +25,8 @@ module "tamr-config" {
   spark_emr_cluster_id           = ""
   spark_cluster_log_uri          = "s3n://${module.s3-logs.bucket_name}/${var.path_to_spark_logs}"
   tamr_data_path                 = "tamr/unify-data"
-  tamr_spark_properties_override = "[{'name' : 'sparkOverride1','executorInstances' : '2','sparkProps' : {'spark.cores.max' : '4'}},{'name' : 'sparkOverride2','driverMemory' : '4G','executorMemory' : '5G'}]"
+  tamr_spark_config_override = "[{'name' : 'sparkOverride1','executorInstances' : '2','sparkProps' : {'spark.cores.max' : '4'}},{'name' : 'sparkOverride2','driverMemory' : '4G','executorMemory' : '5G'}]"
+  tamr_spark_properties_override = "{'spark.driver.maxResultSize':'4g'}"
 
   # ElasticSearch
   es_domain_endpoint = module.tamr-es-cluster.tamr_es_domain_endpoint
