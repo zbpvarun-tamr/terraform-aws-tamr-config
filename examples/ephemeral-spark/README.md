@@ -16,6 +16,7 @@ No requirements.
 
 | Name | Version |
 |------|---------|
+| aws | n/a |
 | random | n/a |
 | tls | n/a |
 
@@ -30,6 +31,7 @@ No requirements.
 | vpc\_id | VPC ID of deployment | `string` | n/a | yes |
 | ingress\_cidr\_blocks | List of CIDR blocks from which ingress to ElasticSearch domain, Tamr VM, Tamr Postgres instance are allowed (i.e. VPN CIDR) | `list(string)` | `[]` | no |
 | name\_prefix | A prefix to add to the names of all created resources. | `string` | `"tamr-config-test"` | no |
+| path\_to\_spark\_logs | Path in logs bucket to store spark logs. E.g. tamr/spark-logs | `string` | `""` | no |
 
 ## Outputs
 
