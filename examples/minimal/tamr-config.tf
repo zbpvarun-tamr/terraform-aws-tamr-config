@@ -6,7 +6,7 @@ module "tamr-config" {
   rendered_config_path       = "./rendered-config.yml"
   ephemeral_spark_configured = false
   additional_templated_variables = {
-    "TAMR_LICENSE_KEY" : "${var.license_key}"
+    "TAMR_LICENSE_KEY" : var.license_key
   }
 
   rds_pg_hostname = module.rds-postgres.rds_hostname
@@ -22,9 +22,9 @@ module "tamr-config" {
   spark_emr_cluster_id           = module.emr.tamr_emr_cluster_id
   spark_cluster_log_uri          = module.emr.log_uri
   tamr_data_path                 = "tamr/unify-data"
-  tamr_spark_config_override = "[{'name' : 'sparkOverride1','executorInstances' : '2','sparkProps' : {'spark.cores.max' : '4'}},{'name' : 'sparkOverride2','driverMemory' : '4G','executorMemory' : '5G'}]"
+  tamr_spark_config_override     = "[{'name' : 'sparkOverride1','executorInstances' : '2','sparkProps' : {'spark.cores.max' : '4'}},{'name' : 'sparkOverride2','driverMemory' : '4G','executorMemory' : '5G'}]"
   tamr_spark_properties_override = "{'spark.driver.maxResultSize':'4g'}"
-  es_domain_endpoint = module.tamr-es-cluster.tamr_es_domain_endpoint
+  es_domain_endpoint             = module.tamr-es-cluster.tamr_es_domain_endpoint
 
   tamr_external_storage_providers = "[{'name' : 's3a_tamr_config_test','description' : 'The S3a filesystem at root of ${module.s3-data.bucket_name}','uri' : 's3a://${module.s3-data.bucket_name}/'}]"
 }

@@ -6,7 +6,7 @@ module "tamr-config" {
   rendered_config_path       = "./rendered-config.yml"
   ephemeral_spark_configured = true
   additional_templated_variables = {
-    "TAMR_LICENSE_KEY" : "${var.license_key}"
+    "TAMR_LICENSE_KEY" : var.license_key
   }
 
   # RDS
@@ -25,7 +25,7 @@ module "tamr-config" {
   spark_emr_cluster_id           = ""
   spark_cluster_log_uri          = "s3n://${module.s3-logs.bucket_name}/${var.path_to_spark_logs}"
   tamr_data_path                 = "tamr/unify-data"
-  tamr_spark_config_override = "[{'name' : 'sparkOverride1','executorInstances' : '2','sparkProps' : {'spark.cores.max' : '4'}},{'name' : 'sparkOverride2','driverMemory' : '4G','executorMemory' : '5G'}]"
+  tamr_spark_config_override     = "[{'name' : 'sparkOverride1','executorInstances' : '2','sparkProps' : {'spark.cores.max' : '4'}},{'name' : 'sparkOverride2','driverMemory' : '4G','executorMemory' : '5G'}]"
   tamr_spark_properties_override = "{'spark.driver.maxResultSize':'4g'}"
 
   # ElasticSearch
@@ -54,7 +54,6 @@ module "tamr-config" {
   emr_additional_master_sg_id = module.ephemeral-spark-sgs.emr_additional_master_sg_id
   emr_managed_core_sg_id      = module.ephemeral-spark-sgs.emr_managed_core_sg_id
   emr_additional_core_sg_id   = module.ephemeral-spark-sgs.emr_additional_core_sg_id
-  emrfs_dynamodb_table_name   = module.ephemeral-spark-config.emrfs_dynamodb_table_name
 }
 
 # Upload the Tamr configuration to S3
