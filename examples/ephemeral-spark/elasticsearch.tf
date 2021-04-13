@@ -1,5 +1,5 @@
 module "tamr-es-cluster" {
-  source = "git::git@github.com:Datatamer/terraform-aws-es?ref=1.0.0"
+  source = "git::git@github.com:Datatamer/terraform-aws-es?ref=1.0.1"
 
   # Names
   domain_name = "${var.name_prefix}-es"
