@@ -1,5 +1,5 @@
 module "tamr-vm" {
-  source = "git::git@github.com:Datatamer/terraform-emr-tamr-vm?ref=0.4.0"
+  source = "git::git@github.com:Datatamer/terraform-emr-tamr-vm?ref=1.0.0"
 
   ami                 = var.ami_id
   instance_type       = "m4.2xlarge"

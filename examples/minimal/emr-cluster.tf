@@ -1,6 +1,6 @@
 # EMR Static HBase,Spark cluster
 module "emr" {
-  source = "git@github.com:Datatamer/terraform-aws-emr.git?ref=0.11.1"
+  source = "git@github.com:Datatamer/terraform-aws-emr.git?ref=3.0.0"
 
   # Configurations
   create_static_cluster = true
@@ -32,7 +32,6 @@ module "emr" {
 
   # Names
   cluster_name                  = "${var.name_prefix}-EMR-Cluster"
-  emrfs_metadata_table_name     = "${var.name_prefix}-EmrFSMetadata"
   emr_service_role_name         = "${var.name_prefix}-service-role"
   emr_ec2_role_name             = "${var.name_prefix}-ec2-role"
   emr_ec2_instance_profile_name = "${var.name_prefix}-emr-instance-profile"
@@ -49,8 +48,9 @@ module "emr" {
   # Scale
   master_group_instance_count = 1
   core_group_instance_count   = 4
-  master_instance_type        = "m4.large"
+  master_instance_type        = "m4.xlarge"
   core_instance_type          = "r5.4xlarge"
   master_ebs_size             = 50
   core_ebs_size               = 200
+  core_bid_price              = "1.260" # r5.4xlarge on emr -> $1.008 + $0.252 = $1.260
 }

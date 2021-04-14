@@ -5,7 +5,7 @@ resource "random_password" "rds-password" {
 }
 
 module "rds-postgres" {
-  source = "git::git@github.com:Datatamer/terraform-aws-rds-postgres.git?ref=0.4.1"
+  source = "git::git@github.com:Datatamer/terraform-aws-rds-postgres.git?ref=1.0.0"
 
   identifier_prefix = "${var.name_prefix}-"
   username          = "tamr"

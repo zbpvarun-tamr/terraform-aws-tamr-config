@@ -16,8 +16,8 @@ This module creates:
 
 | Name | Version |
 |------|---------|
-| terraform | >= 0.12 |
-| aws | >= 2.45.0 |
+| terraform | >= 0.13 |
+| aws | >= 3.36.0 |
 
 ## Providers
 
@@ -35,7 +35,6 @@ This module creates:
 | rds\_pg\_hostname | Hostname of RDS postgres instance. | `string` | n/a | yes |
 | rds\_pg\_password | Master password for RDS postgres database instance. | `string` | n/a | yes |
 | spark\_cluster\_log\_uri | The path to the S3 location where logs for the Spark cluster are stored. | `string` | n/a | yes |
-| spark\_emr\_cluster\_id | Spark cluster ID. | `string` | n/a | yes |
 | tamr\_data\_bucket | Name of Tamr root directory bucket. | `string` | n/a | yes |
 | additional\_templated\_variables | Mapping of additional Tamr variables (not included in template) to its value. If a variable name in this map defines the same key as an input variable, the value specified in this map takes precedence. | `map(string)` | `{}` | no |
 | config\_template\_path | Path to Tamr config template. | `string` | `"./tamr-config.yml"` | no |
@@ -67,11 +66,13 @@ This module creates:
 | rds\_pg\_username | Master username for RDS postgres database instance. | `string` | `"tamr"` | no |
 | rendered\_config\_path | If provided, the populated Tamr config will be output to this path. Include a file name (E.g. /path/to/config.yml). NOTE: Any required parent directories will be created automatically, and any existing file with the given name will be overwritten. | `string` | `""` | no |
 | spark\_driver\_memory | n/a | `string` | `"5G"` | no |
+| spark\_emr\_cluster\_id | Spark cluster ID. Value will not be used if deployment is spinning up ephemeral Spark clusters. | `string` | `""` | no |
 | spark\_executor\_cores | n/a | `number` | `2` | no |
 | spark\_executor\_instances | n/a | `number` | `2` | no |
 | spark\_executor\_memory | n/a | `string` | `"8G"` | no |
 | tamr\_data\_path | Path in root directory bucket (bucket provided for tamr\_bucket\_name input) to write data to. | `string` | `"tamr/unify-data"` | no |
 | tamr\_external\_storage\_providers | Filesystem connection information for external storage providers. | `string` | `""` | no |
+| tamr\_spark\_config\_override | A list of spark config overrides. If not set all jobs will run with the default spark settings. Used for setting job-by-job spark resource settings. | `string` | `""` | no |
 | tamr\_spark\_properties\_override | JSON blob of spark properties to override. If not set, will use a default set of properties that should work for most use cases. | `string` | `""` | no |
 
 ## Outputs

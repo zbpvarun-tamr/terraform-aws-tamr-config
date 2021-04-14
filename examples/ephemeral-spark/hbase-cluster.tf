@@ -1,6 +1,6 @@
 # EMR Static HBase cluster
 module "emr-hbase" {
-  source = "git@github.com:Datatamer/terraform-aws-emr.git?ref=0.10.7"
+  source = "git@github.com:Datatamer/terraform-aws-emr.git?ref=3.0.0"
 
   # Configurations
   create_static_cluster = true
@@ -32,7 +32,6 @@ module "emr-hbase" {
 
   # Names
   cluster_name                  = "${var.name_prefix}-HBase-Cluster"
-  emrfs_metadata_table_name     = "${var.name_prefix}-HBase-EmrFSMetadata"
   emr_service_role_name         = "${var.name_prefix}-hbase-service-role"
   emr_ec2_role_name             = "${var.name_prefix}-hbase-ec2-role"
   emr_ec2_instance_profile_name = "${var.name_prefix}-hbase-emr-instance-profile"
@@ -53,4 +52,5 @@ module "emr-hbase" {
   core_instance_type          = "r5.4xlarge"
   master_ebs_size             = 50
   core_ebs_size               = 200
+  core_bid_price              = "1.260" # r5.4xlarge on emr -> $1.008 + $0.252 = $1.260
 }
