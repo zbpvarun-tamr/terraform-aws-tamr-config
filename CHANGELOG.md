@@ -1,5 +1,8 @@
 # AWS Tamr Config Repo
 
+## v1.0.1 - April 27th 2021
+* Upgrades and pins `terraform-aws-modules/key-pair/aws` to version 1.0.0
+
 ## v1.0.0 - April 13th 2021
 * Updates minimum Terraform version to 13
 * Updates minimum AWS provider version to 3.36.0

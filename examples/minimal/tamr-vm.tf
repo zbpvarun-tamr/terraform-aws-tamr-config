@@ -1,9 +1,9 @@
 module "tamr-vm" {
-  source = "git::git@github.com:Datatamer/terraform-emr-tamr-vm?ref=1.0.0"
+  source = "git::git@github.com:Datatamer/terraform-emr-tamr-vm?ref=1.0.2"
 
   ami                 = var.ami_id
   instance_type       = "m4.2xlarge"
-  key_name            = module.emr_key_pair.this_key_pair_key_name
+  key_name            = module.emr_key_pair.key_pair_key_name
   subnet_id           = var.ec2_subnet_id
   vpc_id              = var.vpc_id
   sg_name             = "${var.name_prefix}-tamrvm-sg"
