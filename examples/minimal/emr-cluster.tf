@@ -28,7 +28,7 @@ module "emr" {
     module.s3-logs.rw_policy_arn,
     module.s3-data.rw_policy_arn
   ]
-  key_pair_name = module.emr_key_pair.this_key_pair_key_name
+  key_pair_name = module.emr_key_pair.key_pair_key_name
 
   # Names
   cluster_name                  = "${var.name_prefix}-EMR-Cluster"

@@ -1,5 +1,5 @@
 module "tamr-config" {
-  #   source = "git::git@github.com:Datatamer/terraform-aws-tamr-config?ref=1.0.0"
+  #   source = "git::git@github.com:Datatamer/terraform-aws-tamr-config?ref=1.0.1"
   source = "../.."
 
   config_template_path       = "../../tamr-config.yml"
@@ -38,7 +38,7 @@ module "tamr-config" {
   emr_release_label           = "emr-5.29.0" # spark 2.4.4
   emr_instance_profile_name   = module.ephemeral-spark-iam.emr_ec2_instance_profile_name
   emr_service_role_name       = module.ephemeral-spark-iam.emr_service_role_name
-  emr_key_pair_name           = module.emr_key_pair.this_key_pair_key_name
+  emr_key_pair_name           = module.emr_key_pair.key_pair_key_name
   emr_subnet_id               = var.ec2_subnet_id
   master_instance_type        = "m4.large"
   master_ebs_volumes_count    = 1
