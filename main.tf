@@ -34,7 +34,9 @@ data "template_file" "tamr_config" {
     tamr_file_based_hbase_backup_enabled    = var.tamr_file_based_hbase_backup_enabled,
     tamr_backup_aws_cli_enabled             = var.tamr_backup_aws_cli_enabled,
     tamr_unify_backup_es                    = var.tamr_unify_backup_es,
-    tamr_unify_backup_aws_role_based_access = var.tamr_unify_backup_aws_role_based_access
+    tamr_unify_backup_aws_role_based_access = var.tamr_unify_backup_aws_role_based_access,
+    apps_dms_enabled                        = var.apps_dms_enabled,
+    apps_dms_default_cloud_provider         = var.apps_dms_default_cloud_provider
   }
 }
 
