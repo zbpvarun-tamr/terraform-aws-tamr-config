@@ -28,8 +28,8 @@ data "template_file" "tamr_config" {
     spark_executor_cores                    = var.spark_executor_cores,
     tamr_spark_config_override              = var.tamr_spark_config_override,
     tamr_spark_properties_override          = var.tamr_spark_properties_override,
-    es_domain_endpoint                      = var.es_domain_endpoint,             # Elasticsearch
-    tamr_data_path                          = var.tamr_data_path,                 # FileSystem
+    es_domain_endpoint                      = var.es_domain_endpoint,              # Elasticsearch
+    tamr_data_path                          = var.tamr_data_path,                  # FileSystem
     tamr_external_storage_providers         = var.tamr_external_storage_providers, # ESP
     tamr_file_based_hbase_backup_enabled    = var.tamr_file_based_hbase_backup_enabled,
     tamr_backup_aws_cli_enabled             = var.tamr_backup_aws_cli_enabled,
