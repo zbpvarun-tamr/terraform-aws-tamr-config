@@ -311,6 +311,12 @@ variable "tamr_unify_backup_aws_role_based_access" {
   default     = true
 }
 
+variable "tamr_unify_backup_path" {
+  type        = string
+  description = "Identifies the path for storing backup files"
+  default     = "tamr/backups"
+}
+
 #
 # DMS Config
 #
