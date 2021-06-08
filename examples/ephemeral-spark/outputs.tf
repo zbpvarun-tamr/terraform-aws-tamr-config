@@ -7,7 +7,8 @@ output "rds-postgres" {
 }
 
 output "rds-pw" {
-  value = random_password.rds-password
+  value     = random_password.rds-password
+  sensitive = true
 }
 
 output "elasticsearch" {
@@ -19,7 +20,8 @@ output "ec2-key" {
 }
 
 output "private-key" {
-  value = tls_private_key.emr_private_key.private_key_pem
+  value     = tls_private_key.emr_private_key.private_key_pem
+  sensitive = true
 }
 
 output "emr-hbase" {
