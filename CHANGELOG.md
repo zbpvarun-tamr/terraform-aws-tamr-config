@@ -1,5 +1,9 @@
 # AWS Tamr Config Repo
 
+## v1.1.1 - June 8th 2021
+* Adds native support for backup config and DMS
+* Updates examples to mark `rds-pw` and `private-key` as sensitive
+
 ## v1.0.1 - April 27th 2021
 * Upgrades and pins `terraform-aws-modules/key-pair/aws` to version 1.0.0
 

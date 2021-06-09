@@ -37,6 +37,8 @@ This module creates:
 | spark\_cluster\_log\_uri | The path to the S3 location where logs for the Spark cluster are stored. | `string` | n/a | yes |
 | tamr\_data\_bucket | Name of Tamr root directory bucket. | `string` | n/a | yes |
 | additional\_templated\_variables | Mapping of additional Tamr variables (not included in template) to its value. If a variable name in this map defines the same key as an input variable, the value specified in this map takes precedence. | `map(string)` | `{}` | no |
+| apps\_dms\_default\_cloud\_provider | Defines the default cloud service provider for DMS when `APPS_DMS_ENABLED` is set to `true` | `string` | `"s3"` | no |
+| apps\_dms\_enabled | Set to `true` to enable the  Data Movement Service (DMS) | `bool` | `true` | no |
 | config\_template\_path | Path to Tamr config template. | `string` | `"./tamr-config.yml"` | no |
 | core\_ebs\_size | The core EBS volume size, in gibibytes (GiB). | `string` | `""` | no |
 | core\_ebs\_type | Type of volumes to attach to the core nodes. Valid options are gp2, io1, standard and st1. | `string` | `""` | no |
@@ -70,10 +72,15 @@ This module creates:
 | spark\_executor\_cores | n/a | `number` | `2` | no |
 | spark\_executor\_instances | n/a | `number` | `2` | no |
 | spark\_executor\_memory | n/a | `string` | `"8G"` | no |
+| tamr\_backup\_aws\_cli\_enabled | Whether to use the AWS S3 command line utility when backing up to or from S3. Note that the AWS S3 CLI will only be used when this is true and it is installed locally | `bool` | `true` | no |
 | tamr\_data\_path | Path in root directory bucket (bucket provided for tamr\_bucket\_name input) to write data to. | `string` | `"tamr/unify-data"` | no |
 | tamr\_external\_storage\_providers | Filesystem connection information for external storage providers. | `string` | `""` | no |
+| tamr\_file\_based\_hbase\_backup\_enabled | Whether to backup contents of HBase root directory to backup path | `bool` | `true` | no |
 | tamr\_spark\_config\_override | A list of spark config overrides. If not set all jobs will run with the default spark settings. Used for setting job-by-job spark resource settings. | `string` | `""` | no |
 | tamr\_spark\_properties\_override | JSON blob of spark properties to override. If not set, will use a default set of properties that should work for most use cases. | `string` | `""` | no |
+| tamr\_unify\_backup\_aws\_role\_based\_access | Set to `true` if Tamr should use EC2 instance profile (role-based) credentials instead of static credentials | `bool` | `true` | no |
+| tamr\_unify\_backup\_es | Defines whether or not to back up Elasticsearch | `bool` | `false` | no |
+| tamr\_unify\_backup\_path | Identifies the path for storing backup files | `string` | `"tamr/backups"` | no |
 
 ## Outputs
 

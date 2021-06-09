@@ -282,3 +282,53 @@ variable "emr_root_volume_size" {
   type        = string
   description = "The size, in GiB, of the EBS root device volume of the Linux AMI that is used for each EMR EC2 instance."
 }
+
+#
+# Backup Config
+#
+
+variable "tamr_file_based_hbase_backup_enabled" {
+  type        = bool
+  description = "Whether to backup contents of HBase root directory to backup path"
+  default     = true
+}
+
+variable "tamr_backup_aws_cli_enabled" {
+  type        = bool
+  description = "Whether to use the AWS S3 command line utility when backing up to or from S3. Note that the AWS S3 CLI will only be used when this is true and it is installed locally"
+  default     = true
+}
+
+variable "tamr_unify_backup_es" {
+  type        = bool
+  description = "Defines whether or not to back up Elasticsearch"
+  default     = false
+}
+
+variable "tamr_unify_backup_aws_role_based_access" {
+  type        = bool
+  description = "Set to `true` if Tamr should use EC2 instance profile (role-based) credentials instead of static credentials"
+  default     = true
+}
+
+variable "tamr_unify_backup_path" {
+  type        = string
+  description = "Identifies the path for storing backup files"
+  default     = "tamr/backups"
+}
+
+#
+# DMS Config
+#
+
+variable "apps_dms_enabled" {
+  type        = bool
+  description = "Set to `true` to enable the  Data Movement Service (DMS)"
+  default     = true
+}
+
+variable "apps_dms_default_cloud_provider" {
+  type        = string
+  description = "Defines the default cloud service provider for DMS when `APPS_DMS_ENABLED` is set to `true`"
+  default     = "s3"
+}
