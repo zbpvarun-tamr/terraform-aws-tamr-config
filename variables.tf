@@ -292,13 +292,7 @@ variable "tamr_file_based_hbase_backup_enabled" {
   description = "Whether to backup contents of HBase root directory to backup path"
   default     = true
 }
-/*
-variable "tamr_backup_aws_cli_enabled" {
-  type        = bool
-  description = "Whether to use the AWS S3 command line utility when backing up to or from S3. Note that the AWS S3 CLI will only be used when this is true and it is installed locally"
-  default     = true
-}
-*/
+
 variable "tamr_unify_backup_es" {
   type        = bool
   description = "Defines whether or not to back up Elasticsearch"
@@ -316,13 +310,7 @@ variable "tamr_unify_backup_path" {
   description = "Identifies the path for storing backup files"
   default     = "tamr/backups"
 }
-/*
-variable "tamr_backup_s3distcp_enabled" {
-  type        = bool
-  description = "Whether to run s3distcp on the deployment's static EMR cluster (see TAMR_BACKUP_EMR_CLUSTER_ID) when backing up to or from S3."
-  default     = true
-}
-*/
+
 variable "tamr_backup_emr_cluster_id" {
   type        = string
   description = "ID of the static EMR cluster to run s3distcp on when backing up to or restoring from S3."
