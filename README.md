@@ -72,7 +72,7 @@ This module creates:
 | spark\_executor\_cores | n/a | `number` | `2` | no |
 | spark\_executor\_instances | n/a | `number` | `2` | no |
 | spark\_executor\_memory | n/a | `string` | `"8G"` | no |
-| tamr\_backup\_aws\_cli\_enabled | Whether to use the AWS S3 command line utility when backing up to or from S3. Note that the AWS S3 CLI will only be used when this is true and it is installed locally | `bool` | `true` | no |
+| tamr\_backup\_emr\_cluster\_id | ID of the static EMR cluster to run s3distcp on when backing up to or restoring from S3. | `string` | `""` | no |
 | tamr\_data\_path | Path in root directory bucket (bucket provided for tamr\_bucket\_name input) to write data to. | `string` | `"tamr/unify-data"` | no |
 | tamr\_external\_storage\_providers | Filesystem connection information for external storage providers. | `string` | `""` | no |
 | tamr\_file\_based\_hbase\_backup\_enabled | Whether to backup contents of HBase root directory to backup path | `bool` | `true` | no |

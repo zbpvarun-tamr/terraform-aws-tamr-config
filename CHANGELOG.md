@@ -1,5 +1,10 @@
 # AWS Tamr Config Repo
 
+## v2.0.0 - June 21st 2021
+* Adds support for alternate backup/restore method that uses EMR's s3distcp
+* Adds configuration `tamr_backup_emr_cluster_id`
+* Removes configuration `tamr_backup_aws_cli_enabled`
+
 ## v1.1.1 - June 8th 2021
 * Adds native support for backup config and DMS
 * Updates examples to mark `rds-pw` and `private-key` as sensitive

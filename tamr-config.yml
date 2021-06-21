@@ -52,6 +52,8 @@ TAMR_BACKUP_AWS_CLI_ENABLED: ${tamr_backup_aws_cli_enabled}
 TAMR_UNIFY_BACKUP_ES: ${tamr_unify_backup_es}
 TAMR_UNIFY_BACKUP_AWS_ROLE_BASED_ACCESS: ${tamr_unify_backup_aws_role_based_access}
 TAMR_UNIFY_BACKUP_URI: s3://${tamr_data_bucket}/${tamr_unify_backup_path}
+TAMR_BACKUP_S3DISTCP_ENABLED: ${tamr_backup_s3distcp_enabled}
+TAMR_BACKUP_EMR_CLUSTER_ID: ${tamr_backup_emr_cluster_id}
 
 # DMS Config
 APPS_DMS_ENABLED: ${apps_dms_enabled}

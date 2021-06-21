@@ -1,5 +1,5 @@
 module "tamr-config" {
-  #   source = "git::git@github.com:Datatamer/terraform-aws-tamr-config?ref=1.1.1"
+  #   source = "git::git@github.com:Datatamer/terraform-aws-tamr-config?ref=2.0.0"
   source = "../.."
 
   config_template_path       = "../../tamr-config.yml"
@@ -27,4 +27,7 @@ module "tamr-config" {
   es_domain_endpoint             = module.tamr-es-cluster.tamr_es_domain_endpoint
 
   tamr_external_storage_providers = "[{'name' : 's3a_tamr_config_test','description' : 'The S3a filesystem at root of ${module.s3-data.bucket_name}','uri' : 's3a://${module.s3-data.bucket_name}/'}]"
+
+  # Backup
+  tamr_backup_emr_cluster_id = module.emr.tamr_emr_cluster_id
 }
