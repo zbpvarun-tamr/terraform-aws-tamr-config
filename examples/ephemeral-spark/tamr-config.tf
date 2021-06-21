@@ -1,5 +1,5 @@
 module "tamr-config" {
-  #   source = "git::git@github.com:Datatamer/terraform-aws-tamr-config?ref=1.1.1"
+  #   source = "git::git@github.com:Datatamer/terraform-aws-tamr-config?ref=2.0.0"
   source = "../.."
 
   config_template_path       = "../../tamr-config.yml"
@@ -8,6 +8,9 @@ module "tamr-config" {
   additional_templated_variables = {
     "TAMR_LICENSE_KEY" : var.license_key
   }
+
+  # Backup
+  tamr_backup_emr_cluster_id = module.emr-hbase.tamr_emr_cluster_id
 
   # RDS
   rds_pg_hostname = module.rds-postgres.rds_hostname
