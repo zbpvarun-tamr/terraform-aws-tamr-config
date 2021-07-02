@@ -1,5 +1,8 @@
 # AWS Tamr Config Repo
 
+## v2.1.0 - July 2nd 2021
+* Add HBase properties including `SHARED` mode to default Tamr config
+
 ## v2.0.0 - June 21st 2021
 * Adds support for alternate backup/restore method that uses EMR's s3distcp
 * Adds configuration `tamr_backup_emr_cluster_id`
