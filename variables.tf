@@ -74,6 +74,28 @@ variable "hbase_config_path" {
 }
 
 #
+# HBase - properties
+#
+
+variable "hbase_storage_mode" {
+  type        = string
+  description = "Storage mode for HBase.  Valid values: `SHARED`, `DEDICATED`"
+  default     = "SHARED"
+}
+
+variable "hbase_number_of_regions" {
+  type        = string
+  description = "Number of regions to create by default in HBase"
+  default     = "1000"
+}
+
+variable "hbase_number_of_salt_values" {
+  type        = string
+  description = "Number of distinct salt values to be used for prefixing row keys in HBase tables.  Must be >= hbase_number_of_regions"
+  default     = "1000"
+}
+
+#
 # Spark
 #
 

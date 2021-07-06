@@ -22,6 +22,9 @@ data "template_file" "tamr_config" {
     hbase_namespace                         = var.hbase_namespace, # HBase
     tamr_data_bucket                        = var.tamr_data_bucket,
     hbase_config_path                       = var.hbase_config_path,
+    hbase_storage_mode                      = var.hbase_storage_mode,
+    hbase_number_of_regions                 = var.hbase_number_of_regions,
+    hbase_number_of_salt_values             = var.hbase_number_of_salt_values,
     spark_emr_cluster_id                    = var.spark_emr_cluster_id, # Spark
     spark_cluster_log_uri                   = var.spark_cluster_log_uri
     spark_driver_memory                     = var.spark_driver_memory, # Spark - Scale
