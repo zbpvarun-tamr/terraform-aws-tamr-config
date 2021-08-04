@@ -89,7 +89,7 @@ module "aws-emr-sg-service-access" {
   ingress_cidr_blocks = var.ingress_cidr_blocks
   egress_cidr_blocks  = var.egress_cidr_blocks
   ingress_ports       = module.sg-ports-emr.ingress_service_access_ports
-  sg_name_prefix      = format("%s-%s", var.name_prefix, "-emr-service-access")
+  sg_name_prefix      = format("%s-%s", var.name_prefix, "emr-service-access")
   egress_protocol     = "all"
   ingress_protocol    = "tcp"
   tags                = merge(var.tags, var.emr_tags)
