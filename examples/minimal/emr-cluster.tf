@@ -1,25 +1,25 @@
+locals {
+  applications = ["Spark", "Hbase", "Ganglia"]
+}
 # EMR Static HBase,Spark cluster
 module "emr" {
-  source = "git@github.com:Datatamer/terraform-aws-emr.git?ref=3.0.0"
+  source = "git@github.com:Datatamer/terraform-aws-emr.git?ref=6.1.0"
 
   # Configurations
   create_static_cluster = true
   release_label         = "emr-5.29.0" # spark 2.4.4, hbase 1.4.10
-  applications          = ["Spark", "Hbase", "Ganglia"]
+  applications          = local.applications
   emr_config_file_path  = "./emr.json"
-  additional_tags       = {}
-  enable_http_port      = true
   bucket_path_to_logs   = "logs/${var.name_prefix}-cluster/"
+  tags                  = merge(var.tags, var.emr_tags)
+  abac_valid_tags       = var.emr_abac_valid_tags
 
   # Networking
   subnet_id  = var.ec2_subnet_id
   vpc_id     = var.vpc_id
-  tamr_cidrs = var.ingress_cidr_blocks
-  tamr_sgs = [
-    module.tamr-vm.tamr_security_groups["tamr_security_group_id"],
-    module.tamr-es-cluster.es_security_group_id,
-    module.rds-postgres.rds_sg_id
-  ]
+  emr_managed_master_sg_ids = module.aws-emr-sg-master.security_group_ids
+  emr_managed_core_sg_ids   = module.aws-emr-sg-core.security_group_ids
+  emr_service_access_sg_ids = module.aws-emr-sg-service-access.security_group_ids
 
   # External resource references
   bucket_name_for_root_directory = module.s3-data.bucket_name
@@ -39,18 +39,57 @@ module "emr" {
   emr_ec2_iam_policy_name       = "${var.name_prefix}-ec2-policy"
   master_instance_group_name    = "${var.name_prefix}-MasterInstanceGroup"
   core_instance_group_name      = "${var.name_prefix}-CoreInstanceGroup"
-  emr_managed_master_sg_name    = "${var.name_prefix}-EMR-Master"
-  emr_managed_core_sg_name      = "${var.name_prefix}-EMR-Core"
-  emr_additional_master_sg_name = "${var.name_prefix}-EMR-Additional-Master"
-  emr_additional_core_sg_name   = "${var.name_prefix}-EMR-Additional-Core"
-  emr_service_access_sg_name    = "${var.name_prefix}-EMR-Service-Access"
+  emr_managed_sg_name           = "${var.name_prefix}-EMR-Managed"
 
   # Scale
-  master_group_instance_count = 1
-  core_group_instance_count   = 4
-  master_instance_type        = "m4.xlarge"
-  core_instance_type          = "r5.4xlarge"
-  master_ebs_size             = 50
-  core_ebs_size               = 200
-  core_bid_price              = "1.260" # r5.4xlarge on emr -> $1.008 + $0.252 = $1.260
+  master_instance_on_demand_count = 1
+  core_instance_on_demand_count   = 4
+  # core_instance_spot_count    = 4
+  # core_bid_price_as_percentage_of_on_demand_price = 100
+  master_instance_type = "m4.large"
+  core_instance_type   = "r5.4xlarge"
+  master_ebs_size      = 50
+  core_ebs_size        = 200
+}
+
+module "sg-ports-emr" {
+  source = "git::https://github.com/Datatamer/terraform-aws-emr.git//modules/aws-emr-ports?ref=6.1.0"
+  # source       = "../../modules/aws-emr-ports"
+  applications = local.applications
+}
+
+module "aws-emr-sg-master" {
+  source              = "git::https://github.com/Datatamer/terraform-aws-security-groups.git?ref=1.0.0"
+  vpc_id              = var.vpc_id
+  ingress_cidr_blocks = var.ingress_cidr_blocks
+  egress_cidr_blocks  = var.egress_cidr_blocks
+  ingress_ports       = module.sg-ports-emr.ingress_master_ports
+  sg_name_prefix      = format("%s-%s", var.name_prefix, "emr-master")
+  egress_protocol     = "all"
+  ingress_protocol    = "tcp"
+  tags                = merge(var.tags, var.emr_tags)
+}
+
+module "aws-emr-sg-core" {
+  source              = "git::https://github.com/Datatamer/terraform-aws-security-groups.git?ref=1.0.0"
+  vpc_id              = var.vpc_id
+  ingress_cidr_blocks = var.ingress_cidr_blocks
+  egress_cidr_blocks  = var.egress_cidr_blocks
+  ingress_ports       = module.sg-ports-emr.ingress_core_ports
+  sg_name_prefix      = format("%s-%s", var.name_prefix, "emr-core")
+  egress_protocol     = "all"
+  ingress_protocol    = "tcp"
+  tags                = merge(var.tags, var.emr_tags)
+}
+
+module "aws-emr-sg-service-access" {
+  source              = "git::https://github.com/Datatamer/terraform-aws-security-groups.git?ref=1.0.0"
+  vpc_id              = var.vpc_id
+  ingress_cidr_blocks = var.ingress_cidr_blocks
+  egress_cidr_blocks  = var.egress_cidr_blocks
+  ingress_ports       = module.sg-ports-emr.ingress_service_access_ports
+  sg_name_prefix      = format("%s-%s", var.name_prefix, "emr-service-access")
+  egress_protocol     = "all"
+  ingress_protocol    = "tcp"
+  tags                = merge(var.tags, var.emr_tags)
 }

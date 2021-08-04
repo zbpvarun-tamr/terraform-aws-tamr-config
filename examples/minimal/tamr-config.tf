@@ -7,6 +7,7 @@ module "tamr-config" {
   ephemeral_spark_configured = false
   additional_templated_variables = {
     "TAMR_LICENSE_KEY" : var.license_key
+    "TAMR_DATASET_EMR_CLUSTER_TAGS" : join(",", flatten([for i, k in var.emr_tags : concat([i], [k])]))
   }
 
   rds_pg_hostname = module.rds-postgres.rds_hostname
