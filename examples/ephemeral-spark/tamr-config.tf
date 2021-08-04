@@ -1,5 +1,5 @@
 module "tamr-config" {
-  #   source = "git::git@github.com:Datatamer/terraform-aws-tamr-config?ref=2.0.0"
+  #   source = "git::git@github.com:Datatamer/terraform-aws-tamr-config?ref=2.1.0"
   source = "../.."
 
   config_template_path       = "../../tamr-config.yml"
@@ -7,6 +7,7 @@ module "tamr-config" {
   ephemeral_spark_configured = true
   additional_templated_variables = {
     "TAMR_LICENSE_KEY" : var.license_key
+    "TAMR_DATASET_EMR_CLUSTER_TAGS" : join(",", flatten([for i, k in var.emr_tags : concat([i], [k])]))
   }
 
   # Backup
@@ -38,25 +39,28 @@ module "tamr-config" {
   tamr_external_storage_providers = "[{'name' : 's3a_tamr_config_test','description' : 'The S3a filesystem at root of ${module.s3-data.bucket_name}','uri' : 's3a://${module.s3-data.bucket_name}/'}]"
 
   # Ephemeral Spark
-  emr_release_label           = "emr-5.29.0" # spark 2.4.4
-  emr_instance_profile_name   = module.ephemeral-spark-iam.emr_ec2_instance_profile_name
-  emr_service_role_name       = module.ephemeral-spark-iam.emr_service_role_name
-  emr_key_pair_name           = module.emr_key_pair.key_pair_key_name
-  emr_subnet_id               = var.ec2_subnet_id
-  master_instance_type        = "m4.large"
-  master_ebs_volumes_count    = 1
-  master_ebs_size             = 50
-  master_ebs_type             = "gp2"
-  core_ebs_volumes_count      = 1
-  core_ebs_size               = 200
-  core_ebs_type               = "gp2"
-  core_group_instance_count   = 4
-  core_instance_type          = "r5.4xlarge"
-  emr_service_access_sg_id    = module.ephemeral-spark-sgs.emr_service_access_sg_id
-  emr_managed_master_sg_id    = module.ephemeral-spark-sgs.emr_managed_master_sg_id
-  emr_additional_master_sg_id = module.ephemeral-spark-sgs.emr_additional_master_sg_id
-  emr_managed_core_sg_id      = module.ephemeral-spark-sgs.emr_managed_core_sg_id
-  emr_additional_core_sg_id   = module.ephemeral-spark-sgs.emr_additional_core_sg_id
+  emr_release_label         = "emr-5.29.0" # spark 2.4.4
+  emr_instance_profile_name = module.ephemeral-spark-iam.emr_ec2_instance_profile_name
+  emr_service_role_name     = module.ephemeral-spark-iam.emr_service_role_name
+  emr_key_pair_name         = module.emr_key_pair.key_pair_key_name
+  emr_subnet_id             = var.ec2_subnet_id
+  master_instance_type      = "m4.large"
+  master_ebs_volumes_count  = 1
+  master_ebs_size           = 50
+  master_ebs_type           = "gp2"
+  core_ebs_volumes_count    = 1
+  core_ebs_size             = 200
+  core_ebs_type             = "gp2"
+  core_group_instance_count = 4
+  core_instance_type        = "r5.4xlarge"
+
+  emr_managed_master_sg_id = module.ephemeral-spark-sgs.emr_managed_sg_id
+  # emr_managed_master_sg_id = "" # you may leave this blank and AWS creates one automatically
+  emr_additional_master_sg_id = join(", ", module.aws-emr-sg-core.security_group_ids)
+  emr_managed_core_sg_id      = module.ephemeral-spark-sgs.emr_managed_sg_id
+  # emr_managed_core_sg_id   = "" # you may leave this blank and AWS creates one automatically
+  emr_additional_core_sg_id = join(", ", module.aws-emr-sg-master.security_group_ids)
+  emr_service_access_sg_id  = ""
 }
 
 # Upload the Tamr configuration to S3
