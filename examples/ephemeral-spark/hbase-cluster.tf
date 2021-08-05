@@ -48,7 +48,7 @@ module "emr-hbase" {
   # core_instance_spot_count    = 4
   # core_bid_price_as_percentage_of_on_demand_price = 100
   master_instance_type = "m4.large"
-  core_instance_type   = "r5.4xlarge"
+  core_instance_type   = "r5.xlarge"
   master_ebs_size      = 50
   core_ebs_size        = 200
 }
