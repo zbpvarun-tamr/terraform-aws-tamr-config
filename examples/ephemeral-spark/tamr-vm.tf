@@ -26,7 +26,6 @@ module "tamr-vm" {
 
 module "aws-vm-sg-ports" {
   source = "git::git@github.com:Datatamer/terraform-aws-tamr-vm.git//modules/aws-security-groups?ref=4.1.0"
-  # source = "../../modules/aws-security-groups"
 }
 
 module "aws-sg-vm" {

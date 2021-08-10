@@ -26,7 +26,6 @@ data "aws_region" "current" {}
 # Security Groups
 module "sg-ports-es" {
   source = "git::git@github.com:Datatamer/terraform-aws-es.git//modules/es-ports?ref=2.1.0"
-  # source = "../../modules/es-ports"
 }
 
 module "aws-sg-es" {

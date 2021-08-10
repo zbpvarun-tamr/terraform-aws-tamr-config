@@ -52,7 +52,7 @@ module "emr" {
 
 module "sg-ports-emr" {
   source = "git::git@github.com:Datatamer/terraform-aws-emr.git//modules/aws-emr-ports?ref=6.1.0"
-  # source       = "../../modules/aws-emr-ports"
+
   applications = local.applications
 }
 
