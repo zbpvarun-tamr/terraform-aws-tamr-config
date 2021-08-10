@@ -25,12 +25,12 @@ data "aws_region" "current" {}
 
 # Security Groups
 module "sg-ports-es" {
-  source = "git::https://github.com/Datatamer/terraform-aws-es.git//modules/es-ports?ref=2.1.0"
+  source = "git::git@github.com:Datatamer/terraform-aws-es.git//modules/es-ports?ref=2.1.0"
   # source = "../../modules/es-ports"
 }
 
 module "aws-sg-es" {
-  source              = "git::https://github.com/Datatamer/terraform-aws-security-groups.git?ref=1.0.0"
+  source              = "git::git@github.com:Datatamer/terraform-aws-security-groups.git?ref=1.0.0"
   vpc_id              = var.vpc_id
   ingress_cidr_blocks = var.ingress_cidr_blocks
   egress_cidr_blocks = [
