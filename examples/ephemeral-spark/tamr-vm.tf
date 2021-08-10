@@ -1,5 +1,5 @@
 module "tamr-vm" {
-  source = "git::git@github.com:Datatamer/terraform-emr-tamr-vm?ref=3.3.0"
+  source = "git::https://github.com/Datatamer/terraform-aws-tamr-vm.git?ref=4.1.0"
 
   ami                = var.ami_id
   instance_type      = "m4.2xlarge"
@@ -25,7 +25,7 @@ module "tamr-vm" {
 
 
 module "aws-vm-sg-ports" {
-  source = "git::https://github.com/Datatamer/terraform-aws-tamr-vm.git//modules/aws-security-groups?ref=3.3.0"
+  source = "git::https://github.com/Datatamer/terraform-aws-tamr-vm.git//modules/aws-security-groups?ref=4.1.0"
   # source = "../../modules/aws-security-groups"
 }
 

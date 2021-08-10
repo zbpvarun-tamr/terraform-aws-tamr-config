@@ -54,7 +54,7 @@ module "emr-hbase" {
 }
 
 module "sg-ports-emr" {
-  source = "git::https://github.com/Datatamer/terraform-aws-emr.git//modules/aws-emr-ports?ref=6.0.0"
+  source = "git::https://github.com/Datatamer/terraform-aws-emr.git//modules/aws-emr-ports?ref=6.1.0"
   # source       = "../../modules/aws-emr-ports"
   applications = local.applications
 }
