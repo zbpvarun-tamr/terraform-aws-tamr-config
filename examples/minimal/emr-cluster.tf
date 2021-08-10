@@ -44,8 +44,6 @@ module "emr" {
   # Scale
   master_instance_on_demand_count = 1
   core_instance_on_demand_count   = 4
-  # core_instance_spot_count    = 4
-  # core_bid_price_as_percentage_of_on_demand_price = 100
   master_instance_type = "m4.2xlarge"
   core_instance_type   = "r5.2xlarge"
   master_ebs_size      = 50
