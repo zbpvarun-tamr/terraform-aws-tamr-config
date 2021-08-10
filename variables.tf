@@ -354,3 +354,9 @@ variable "apps_dms_default_cloud_provider" {
   description = "Defines the default cloud service provider for DMS when `APPS_DMS_ENABLED` is set to `true`"
   default     = "s3"
 }
+
+variable "emr_tags" {
+  type        = map(string)
+  description = "Map of tags to add to new resources in EMR"
+  default     = {}
+}
