@@ -5,7 +5,7 @@ resource "random_password" "rds-password" {
 }
 
 module "rds-postgres" {
-  source = "git::git@github.com:Datatamer/terraform-aws-rds-postgres.git?ref=1.0.0"
+  source = "git::git@github.com:Datatamer/terraform-aws-rds-postgres.git?ref=3.0.0"
 
   identifier_prefix = "${var.name_prefix}-"
   username          = "tamr"
@@ -14,21 +14,27 @@ module "rds-postgres" {
   subnet_group_name    = "${var.name_prefix}-subnet-group"
   postgres_name        = "tamr0"
   parameter_group_name = "${var.name_prefix}-rds-postgres-pg"
-  security_group_name  = "${var.name_prefix}-sg"
 
   vpc_id = var.vpc_id
   # Network requirement: DB subnet group needs a subnet in at least two AZs
   rds_subnet_ids = var.rds_subnet_group_ids
 
-  ingress_sg_ids = [
-    // Spark
-    module.ephemeral-spark-sgs.emr_service_access_sg_id,
-    module.ephemeral-spark-sgs.emr_managed_master_sg_id,
-    module.ephemeral-spark-sgs.emr_additional_master_sg_id,
-    module.ephemeral-spark-sgs.emr_managed_core_sg_id,
-    module.ephemeral-spark-sgs.emr_additional_core_sg_id,
-    // Tamr VM
-    module.tamr-vm.tamr_security_groups["tamr_security_group_id"]
-  ]
-  additional_cidrs = var.ingress_cidr_blocks
+  security_group_ids = module.rds-postgres-sg.security_group_ids
+  tags               = var.tags
+}
+
+module "sg-ports-rds" {
+  source = "git::git@github.com:Datatamer/terraform-aws-rds-postgres.git//modules/rds-postgres-ports?ref=3.0.0"
+}
+
+module "rds-postgres-sg" {
+  source              = "git::git@github.com:Datatamer/terraform-aws-security-groups.git?ref=1.0.0"
+  vpc_id              = var.vpc_id
+  ingress_cidr_blocks = var.ingress_cidr_blocks
+  egress_cidr_blocks  = var.egress_cidr_blocks
+  ingress_ports       = module.sg-ports-rds.ingress_ports
+  sg_name_prefix      = var.name_prefix
+  egress_protocol     = "all"
+  ingress_protocol    = "tcp"
+  tags                = var.tags
 }

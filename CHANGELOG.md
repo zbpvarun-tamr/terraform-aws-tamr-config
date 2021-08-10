@@ -1,5 +1,9 @@
 # AWS Tamr Config Repo
 
+## v2.2.0 - August 10th 2021
+* Adds variable `emr_tags` that is passed to the config `TAMR_DATASET_EMR_CLUSTER_TAGS` into the file
+* Updates examples to use new versions of modules
+
 ## v2.1.0 - July 2nd 2021
 * Add HBase properties including `SHARED` mode to default Tamr config
 

@@ -1,5 +1,6 @@
 locals {
-  template_config = yamldecode(file(var.config_template_path)) # template config from yaml to map
+  tamr_dataset_emr_cluster_tags = join(",", flatten([for i, k in var.emr_tags : concat([i], [k])]))
+  template_config               = yamldecode(file(var.config_template_path)) # template config from yaml to map
   merged_config = (
     var.ephemeral_spark_configured ? (
       merge(local.template_config, local.ephemeral_spark_vars, var.additional_templated_variables)
@@ -45,6 +46,7 @@ data "template_file" "tamr_config" {
     tamr_backup_emr_cluster_id              = var.tamr_backup_emr_cluster_id,
     apps_dms_enabled                        = var.apps_dms_enabled, # DMS
     apps_dms_default_cloud_provider         = var.apps_dms_default_cloud_provider
+    tamr_dataset_emr_cluster_tags           = local.tamr_dataset_emr_cluster_tags
   }
 }
 
