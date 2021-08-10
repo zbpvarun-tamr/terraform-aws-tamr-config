@@ -1,11 +1,11 @@
 module "tamr-vm" {
   source = "git::git@github.com:Datatamer/terraform-emr-tamr-vm?ref=3.3.0"
 
-  ami                 = var.ami_id
-  instance_type       = "m4.2xlarge"
-  key_name            = module.emr_key_pair.key_pair_key_name
-  subnet_id           = var.ec2_subnet_id
-  vpc_id              = var.vpc_id
+  ami                = var.ami_id
+  instance_type      = "m4.2xlarge"
+  key_name           = module.emr_key_pair.key_pair_key_name
+  subnet_id          = var.ec2_subnet_id
+  vpc_id             = var.vpc_id
   security_group_ids = module.aws-sg-vm.security_group_ids
 
   aws_role_name               = "${var.name_prefix}-tamr-ec2-role"

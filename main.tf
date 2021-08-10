@@ -1,6 +1,6 @@
 locals {
   tamr_dataset_emr_cluster_tags = join(",", flatten([for i, k in var.emr_tags : concat([i], [k])]))
-  template_config = yamldecode(file(var.config_template_path)) # template config from yaml to map
+  template_config               = yamldecode(file(var.config_template_path)) # template config from yaml to map
   merged_config = (
     var.ephemeral_spark_configured ? (
       merge(local.template_config, local.ephemeral_spark_vars, var.additional_templated_variables)

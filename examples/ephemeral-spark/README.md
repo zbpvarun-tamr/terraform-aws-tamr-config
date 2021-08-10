@@ -34,6 +34,7 @@ No requirements.
 | ingress\_cidr\_blocks | List of CIDR blocks from which ingress to ElasticSearch domain, Tamr VM, Tamr Postgres instance are allowed (i.e. VPN CIDR) | `list(string)` | `[]` | no |
 | name\_prefix | A prefix to add to the names of all created resources. | `string` | `"tamr-config-test"` | no |
 | path\_to\_spark\_logs | Path in logs bucket to store spark logs. E.g. tamr/spark-logs | `string` | `""` | no |
+| tags | Map of tags to add to resources. | `map(string)` | `{}` | no |
 
 ## Outputs
 
