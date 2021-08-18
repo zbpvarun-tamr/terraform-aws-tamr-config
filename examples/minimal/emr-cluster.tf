@@ -85,8 +85,8 @@ module "aws-emr-sg-service-access" {
   source              = "git::git@github.com:Datatamer/terraform-aws-security-groups.git?ref=1.0.0"
   vpc_id              = var.vpc_id
   ingress_cidr_blocks = var.ingress_cidr_blocks
-  egress_cidr_blocks  = var.egress_cidr_blocks
   ingress_ports       = module.sg-ports-emr.ingress_service_access_ports
+  egress_cidr_blocks  = var.egress_cidr_blocks
   sg_name_prefix      = format("%s-%s", var.name_prefix, "emr-service-access")
   egress_protocol     = "all"
   ingress_protocol    = "tcp"
