@@ -14,7 +14,7 @@ module "tamr-es-cluster" {
 
   # Networking
   vpc_id             = var.vpc_id
-  subnet_ids         = [var.ec2_subnet_id]
+  subnet_ids         = [data.aws_subnet.data_subnet_es.id]
   security_group_ids = module.aws-sg-es.security_group_ids
   # CIDR blocks to allow ingress from (i.e. VPN)
   ingress_cidr_blocks = var.ingress_cidr_blocks
@@ -40,4 +40,19 @@ module "aws-sg-es" {
   tags             = var.tags
   ingress_protocol = "tcp"
   egress_protocol  = "all"
+}
+
+data "aws_subnet" "application_subnet" {
+  id = var.ec2_subnet_id
+}
+
+data "aws_subnet" "data_subnet_es" {
+  filter {
+    name   = "availability-zone"
+    values = [data.aws_subnet.application_subnet.availability_zone]
+  }
+  filter {
+    name   = "subnet-id"
+    values = toset(var.data_subnet_ids)
+  }
 }
