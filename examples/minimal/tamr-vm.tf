@@ -8,6 +8,7 @@ module "tamr-vm" {
   vpc_id             = var.vpc_id
   security_group_ids = module.aws-sg-vm.security_group_ids
 
+  availability_zone           = data.aws_subnet.application_subnet.availability_zone
   aws_role_name               = "${var.name_prefix}-tamr-ec2-role"
   aws_instance_profile_name   = "${var.name_prefix}-tamrvm-instance-profile"
   aws_emr_creator_policy_name = "${var.name_prefix}-emr-creator-policy"
