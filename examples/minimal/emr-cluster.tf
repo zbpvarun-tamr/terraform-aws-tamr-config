@@ -37,9 +37,10 @@ module "emr" {
   emr_ec2_instance_profile_name = "${var.name_prefix}-emr-instance-profile"
   emr_service_iam_policy_name   = "${var.name_prefix}-service-policy"
   emr_ec2_iam_policy_name       = "${var.name_prefix}-ec2-policy"
-  master_instance_group_name    = "${var.name_prefix}-MasterInstanceGroup"
-  core_instance_group_name      = "${var.name_prefix}-CoreInstanceGroup"
+  master_instance_fleet_name    = "${var.name_prefix}-MasterInstanceFleet"
+  core_instance_fleet_name      = "${var.name_prefix}-CoreInstanceFleet"
   emr_managed_sg_name           = "${var.name_prefix}-EMR-Managed"
+  emr_service_access_sg_name    = "${var.name_prefix}-EMR-Service-Access"
 
   # Scale
   master_instance_on_demand_count = 1
