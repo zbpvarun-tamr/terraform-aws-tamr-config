@@ -56,12 +56,13 @@ This module creates:
 | emr\_service\_access\_sg\_id | Security group ID of EMR Service Access Security Group. | `string` | `""` | no |
 | emr\_service\_role\_name | Name of IAM service role for EMR cluster. | `string` | `""` | no |
 | emr\_subnet\_id | ID of the subnet where the EMR cluster will be created. | `string` | `""` | no |
+| emr\_tags | Map of tags to add to new resources in EMR | `map(string)` | `{}` | no |
 | emrfs\_dynamodb\_table\_name | Name for the EMRFS DynamoDB table. | `string` | `""` | no |
 | hbase\_config\_path | Path to HBase configuration in EMR root directory bucket. | `string` | `"config/hbase/conf.dist/"` | no |
 | hbase\_namespace | n/a | `string` | `"tamr"` | no |
-| hbase\_storage\_mode | Storage mode for HBase.  Valid values: `SHARED`, `DEDICATED` | `string` | `"SHARED"` | no |
 | hbase\_number\_of\_regions | Number of regions to create by default in HBase | `string` | `"1000"` | no |
-| hbase\_number\_of\_salt\_values | Number of distinct salt values to be used for prefixing row keys in HBase tables.  Must be >= hbase_number_of_regions | `string` | `"1000"` | no |
+| hbase\_number\_of\_salt\_values | Number of distinct salt values to be used for prefixing row keys in HBase tables.  Must be >= hbase\_number\_of\_regions | `string` | `"1000"` | no |
+| hbase\_storage\_mode | Storage mode for HBase.  Valid values: `SHARED`, `DEDICATED` | `string` | `"SHARED"` | no |
 | master\_ebs\_size | The master EBS volume size, in gibibytes (GiB). | `string` | `""` | no |
 | master\_ebs\_type | Type of volumes to attach to the master nodes. Valid options are gp2, io1, standard and st1. | `string` | `""` | no |
 | master\_ebs\_volumes\_count | Number of volumes to attach to the master nodes. | `string` | `""` | no |

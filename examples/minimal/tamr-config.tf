@@ -8,6 +8,7 @@ module "tamr-config" {
   additional_templated_variables = {
     "TAMR_LICENSE_KEY" : var.license_key
   }
+  emr_tags = var.emr_tags
 
   rds_pg_hostname = module.rds-postgres.rds_hostname
   rds_pg_dbname   = module.rds-postgres.rds_dbname
