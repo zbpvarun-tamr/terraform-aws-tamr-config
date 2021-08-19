@@ -7,7 +7,7 @@ data "aws_availability_zones" "available" {
 }
 
 module "vpc" {
-  source = "git::https://github.com/Datatamer/terraform-aws-networking.git?ref=0.1.0"
+  source                        = "git::https://github.com/Datatamer/terraform-aws-networking.git?ref=0.1.0"
   ingress_cidr_blocks           = var.ingress_cidr_blocks
   vpc_cidr_block                = "10.0.0.0/16"
   data_subnet_cidr_blocks       = ["10.0.2.0/24", "10.0.3.0/24"]
