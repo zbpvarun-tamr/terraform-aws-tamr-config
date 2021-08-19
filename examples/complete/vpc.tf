@@ -1,5 +1,5 @@
 locals {
-  azs     = length(var.availability_zones) > 0 ? var.availability_zones : slice(data.aws_availability_zones.available.names, 0, 2)
+  azs = length(var.availability_zones) > 0 ? var.availability_zones : slice(data.aws_availability_zones.available.names, 0, 2)
 }
 
 data "aws_availability_zones" "available" {
@@ -17,9 +17,5 @@ module "vpc" {
   create_public_subnets         = false
   create_load_balancing_subnets = false
   enable_nat_gateway            = false
-  tags = {
-    "application" : "tamr",
-    "Terraform" : "true",
-    "Example": "Complete"
-  }
+  tags                          = merge(var.tags, var.emr_tags)
 }
