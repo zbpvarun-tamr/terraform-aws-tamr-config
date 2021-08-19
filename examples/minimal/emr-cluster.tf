@@ -15,7 +15,7 @@ module "emr" {
   abac_valid_tags       = var.emr_abac_valid_tags
 
   # Networking
-  subnet_id                 = var.ec2_subnet_id
+  subnet_id                 = var.emr_subnet_id
   vpc_id                    = var.vpc_id
   emr_managed_master_sg_ids = module.aws-emr-sg-master.security_group_ids
   emr_managed_core_sg_ids   = module.aws-emr-sg-core.security_group_ids
@@ -37,17 +37,18 @@ module "emr" {
   emr_ec2_instance_profile_name = "${var.name_prefix}-emr-instance-profile"
   emr_service_iam_policy_name   = "${var.name_prefix}-service-policy"
   emr_ec2_iam_policy_name       = "${var.name_prefix}-ec2-policy"
-  master_instance_group_name    = "${var.name_prefix}-MasterInstanceGroup"
-  core_instance_group_name      = "${var.name_prefix}-CoreInstanceGroup"
+  master_instance_fleet_name    = "${var.name_prefix}-MasterInstanceFleet"
+  core_instance_fleet_name      = "${var.name_prefix}-CoreInstanceFleet"
   emr_managed_sg_name           = "${var.name_prefix}-EMR-Managed"
+  emr_service_access_sg_name    = "${var.name_prefix}-EMR-Service-Access"
 
   # Scale
   master_instance_on_demand_count = 1
   core_instance_on_demand_count   = 4
-  master_instance_type = "m4.2xlarge"
-  core_instance_type   = "r5.2xlarge"
-  master_ebs_size      = 50
-  core_ebs_size        = 200
+  master_instance_type            = "m4.2xlarge"
+  core_instance_type              = "r5.2xlarge"
+  master_ebs_size                 = 50
+  core_ebs_size                   = 200
 }
 
 module "sg-ports-emr" {
@@ -84,8 +85,8 @@ module "aws-emr-sg-service-access" {
   source              = "git::git@github.com:Datatamer/terraform-aws-security-groups.git?ref=1.0.0"
   vpc_id              = var.vpc_id
   ingress_cidr_blocks = var.ingress_cidr_blocks
-  egress_cidr_blocks  = var.egress_cidr_blocks
   ingress_ports       = module.sg-ports-emr.ingress_service_access_ports
+  egress_cidr_blocks  = var.egress_cidr_blocks
   sg_name_prefix      = format("%s-%s", var.name_prefix, "emr-service-access")
   egress_protocol     = "all"
   ingress_protocol    = "tcp"

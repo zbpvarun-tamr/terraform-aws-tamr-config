@@ -17,7 +17,7 @@ module "rds-postgres" {
 
   vpc_id = var.vpc_id
   # Network requirement: DB subnet group needs a subnet in at least two AZs
-  rds_subnet_ids = var.rds_subnet_group_ids
+  rds_subnet_ids = var.data_subnet_ids
 
   security_group_ids = module.rds-postgres-sg.security_group_ids
   tags               = var.tags
