@@ -37,3 +37,6 @@ terratest.tf.json
 
 # Ignore makefile
 ops-makefile
+
+# Ignore rendered-config.yml
+**/rendered-config.yml
