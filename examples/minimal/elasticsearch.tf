@@ -32,6 +32,7 @@ module "aws-sg-es" {
   source              = "git::git@github.com:Datatamer/terraform-aws-security-groups.git?ref=1.0.0"
   vpc_id              = var.vpc_id
   ingress_cidr_blocks = var.ingress_cidr_blocks
+  ingress_security_groups = concat(module.aws-sg-vm.security_group_ids, module.aws-emr-sg-master.security_group_ids, module.aws-emr-sg-core.security_group_ids)
   egress_cidr_blocks = [
     "0.0.0.0/0"
   ]
