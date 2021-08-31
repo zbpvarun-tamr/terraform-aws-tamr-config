@@ -35,9 +35,9 @@ module "tamr-config" {
   spark_emr_cluster_id           = ""
   spark_cluster_log_uri          = "s3n://${module.s3-logs.bucket_name}/${var.path_to_spark_logs}"
   spark_driver_memory            = "10G"
-  spark_executor_instances       = 8
-  spark_executor_memory          = "16G"
-  spark_executor_cores           = 4
+  spark_executor_instances       = 7
+  spark_executor_memory          = "12G"
+  spark_executor_cores           = 2
   tamr_data_path                 = "tamr/unify-data"
   tamr_spark_config_override     = "[{'name' : 'sparkOverride1','executorInstances' : '2','sparkProps' : {'spark.cores.max' : '4'}},{'name' : 'sparkOverride2','driverMemory' : '4G','executorMemory' : '5G'}]"
   tamr_spark_properties_override = "{'spark.driver.maxResultSize':'4g'}"
