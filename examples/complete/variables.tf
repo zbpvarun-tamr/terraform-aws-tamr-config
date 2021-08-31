@@ -50,3 +50,28 @@ variable "emr_abac_valid_tags" {
   description = "Valid tags for maintaining resources when using ABAC IAM Policies with Tag Conditions. Make sure `emr_tags` contain the values specified here and that your Subnet is tagged as well"
   default     = {}
 }
+
+variable "vpc_cidr_block" {
+  type        = list(string)
+  description = "CIDR Block for the VPC"
+  default     = "10.0.0.0/16"
+}
+
+variable "data_subnet_cidr_blocks" {
+  type        = list(string)
+  description = "List of CIDR blocks for the data subnets"
+  default     = ["10.0.2.0/24", "10.0.3.0/24"]
+}
+
+variable "application_subnet_cidr_block" {
+  type        = list(string)
+  description = "CIDR Block for the application subnet"
+  default     = "10.0.0.0/24"
+}
+
+variable "compute_subnet_cidr_block" {
+  type        = list(string)
+  description = "CIDR Block for the compute subnet"
+  default     = "10.0.1.0/24"
+}
+
