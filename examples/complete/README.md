@@ -25,13 +25,17 @@ No requirements.
 |------|-------------|------|---------|:--------:|
 | license\_key | Tamr license key | `string` | n/a | yes |
 | ami\_id | AMI to use for Tamr EC2 instance | `string` | `""` | no |
+| application\_subnet\_cidr\_block | CIDR Block for the application subnet | `list(string)` | `"10.0.0.0/24"` | no |
 | availability\_zones | The list of availability zones where we should deploy resources. Must be exactly 2 | `list(string)` | `[]` | no |
+| compute\_subnet\_cidr\_block | CIDR Block for the compute subnet | `list(string)` | `"10.0.1.0/24"` | no |
+| data\_subnet\_cidr\_blocks | List of CIDR blocks for the data subnets | `list(string)` | <pre>[<br>  "10.0.2.0/24",<br>  "10.0.3.0/24"<br>]</pre> | no |
 | egress\_cidr\_blocks | List of CIDR blocks from which ingress to ElasticSearch domain, Tamr VM, Tamr Postgres instance are allowed (i.e. VPN CIDR) | `list(string)` | <pre>[<br>  "0.0.0.0/0"<br>]</pre> | no |
 | emr\_abac\_valid\_tags | Valid tags for maintaining resources when using ABAC IAM Policies with Tag Conditions. Make sure `emr_tags` contain the values specified here and that your Subnet is tagged as well | `map(list(string))` | `{}` | no |
 | emr\_tags | Map of tags to add to EMR resources. They must contain abac\_valid\_tags at minimum | `map(string)` | `{}` | no |
 | ingress\_cidr\_blocks | List of CIDR blocks from which ingress to ElasticSearch domain, Tamr VM, Tamr Postgres instance are allowed (i.e. VPN CIDR) | `list(string)` | `[]` | no |
 | name\_prefix | A prefix to add to the names of all created resources. | `string` | `"tamr-config-test"` | no |
 | tags | Map of tags to add to resources. | `map(string)` | `{}` | no |
+| vpc\_cidr\_block | CIDR Block for the VPC | `list(string)` | `"10.0.0.0/16"` | no |
 
 ## Outputs
 

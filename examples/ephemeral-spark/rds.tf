@@ -28,14 +28,14 @@ module "sg-ports-rds" {
 }
 
 module "rds-postgres-sg" {
-  source              = "git::git@github.com:Datatamer/terraform-aws-security-groups.git?ref=1.0.0"
-  vpc_id              = var.vpc_id
-  ingress_cidr_blocks = var.ingress_cidr_blocks
+  source                  = "git::git@github.com:Datatamer/terraform-aws-security-groups.git?ref=1.0.0"
+  vpc_id                  = var.vpc_id
+  ingress_cidr_blocks     = var.ingress_cidr_blocks
   ingress_security_groups = module.aws-sg-vm.security_group_ids
-  egress_cidr_blocks  = var.egress_cidr_blocks
-  ingress_ports       = module.sg-ports-rds.ingress_ports
-  sg_name_prefix      = var.name_prefix
-  egress_protocol     = "all"
-  ingress_protocol    = "tcp"
-  tags                = var.tags
+  egress_cidr_blocks      = var.egress_cidr_blocks
+  ingress_ports           = module.sg-ports-rds.ingress_ports
+  sg_name_prefix          = var.name_prefix
+  egress_protocol         = "all"
+  ingress_protocol        = "tcp"
+  tags                    = var.tags
 }

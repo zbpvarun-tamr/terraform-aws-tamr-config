@@ -58,16 +58,16 @@ module "sg-ports-emr" {
 }
 
 module "aws-emr-sg-master" {
-  source              = "git::git@github.com:Datatamer/terraform-aws-security-groups.git?ref=1.0.0"
-  vpc_id              = module.vpc.vpc_id
-  ingress_cidr_blocks  = var.ingress_cidr_blocks
+  source                  = "git::git@github.com:Datatamer/terraform-aws-security-groups.git?ref=1.0.0"
+  vpc_id                  = module.vpc.vpc_id
+  ingress_cidr_blocks     = var.ingress_cidr_blocks
   ingress_security_groups = module.aws-sg-vm.security_group_ids
-  egress_cidr_blocks = var.egress_cidr_blocks
-  ingress_ports       = module.sg-ports-emr.ingress_master_ports
-  sg_name_prefix      = format("%s-%s", var.name_prefix, "emr-master")
-  egress_protocol     = "all"
-  ingress_protocol    = "tcp"
-  tags                = merge(var.tags, var.emr_tags)
+  egress_cidr_blocks      = var.egress_cidr_blocks
+  ingress_ports           = module.sg-ports-emr.ingress_master_ports
+  sg_name_prefix          = format("%s-%s", var.name_prefix, "emr-master")
+  egress_protocol         = "all"
+  ingress_protocol        = "tcp"
+  tags                    = merge(var.tags, var.emr_tags)
 }
 
 module "aws-emr-sg-core" {
