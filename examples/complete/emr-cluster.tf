@@ -74,6 +74,7 @@ module "aws-emr-sg-core" {
   source              = "git::git@github.com:Datatamer/terraform-aws-security-groups.git?ref=1.0.0"
   vpc_id              = module.vpc.vpc_id
   ingress_cidr_blocks = var.ingress_cidr_blocks
+  ingress_security_groups = module.aws-sg-vm.security_group_ids
   egress_cidr_blocks  = var.egress_cidr_blocks
   ingress_ports       = module.sg-ports-emr.ingress_core_ports
   sg_name_prefix      = format("%s-%s", var.name_prefix, "emr-core")
