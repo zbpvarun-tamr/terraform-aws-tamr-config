@@ -26,7 +26,10 @@ module "tamr-config" {
   tamr_spark_config_override     = "[{'name' : 'sparkOverride1','executorInstances' : '2','sparkProps' : {'spark.cores.max' : '4'}},{'name' : 'sparkOverride2','driverMemory' : '4G','executorMemory' : '5G'}]"
   tamr_spark_properties_override = "{'spark.driver.maxResultSize':'4g'}"
   es_domain_endpoint             = module.tamr-es-cluster.tamr_es_domain_endpoint
-
+  spark_driver_memory = "10G"
+  spark_executor_cores = "4"
+  spark_executor_instances = 8
+  spark_executor_memory = "16G"
   tamr_external_storage_providers = "[{'name' : 's3a_tamr_config_test','description' : 'The S3a filesystem at root of ${module.s3-data.bucket_name}','uri' : 's3a://${module.s3-data.bucket_name}/'}]"
 
   # Backup
