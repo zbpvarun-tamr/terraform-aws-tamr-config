@@ -52,7 +52,7 @@ variable "emr_abac_valid_tags" {
 }
 
 variable "vpc_cidr_block" {
-  type        = list(string)
+  type        = string
   description = "CIDR Block for the VPC"
   default     = "10.0.0.0/16"
 }
@@ -64,13 +64,13 @@ variable "data_subnet_cidr_blocks" {
 }
 
 variable "application_subnet_cidr_block" {
-  type        = list(string)
+  type        = string
   description = "CIDR Block for the application subnet"
   default     = "10.0.0.0/24"
 }
 
 variable "compute_subnet_cidr_block" {
-  type        = list(string)
+  type        = string
   description = "CIDR Block for the compute subnet"
   default     = "10.0.1.0/24"
 }
