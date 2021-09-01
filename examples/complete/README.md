@@ -5,6 +5,7 @@ This example demonstrates a terraform-generated Tamr config for a full aws-scale
 - Elasticsearch domain
 - RDS Postgres instance
 - Tamr VM deployment
+- VPC with Tamr requirements
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements

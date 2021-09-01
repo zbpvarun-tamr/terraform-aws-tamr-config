@@ -74,4 +74,3 @@ variable "compute_subnet_cidr_block" {
   description = "CIDR Block for the compute subnet"
   default     = "10.0.1.0/24"
 }
-
