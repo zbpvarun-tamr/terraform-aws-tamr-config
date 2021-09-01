@@ -14,7 +14,7 @@ module "tamr-es-cluster" {
 
   # Networking
   vpc_id             = var.vpc_id
-  subnet_ids         = [var.ec2_subnet_id]
+  subnet_ids         = [var.data_subnet_ids[0]]
   security_group_ids = module.aws-sg-es.security_group_ids
   # CIDR blocks to allow ingress from (i.e. VPN)
   ingress_cidr_blocks = var.ingress_cidr_blocks
@@ -26,6 +26,10 @@ data "aws_region" "current" {}
 # Security Groups
 module "sg-ports-es" {
   source = "git::git@github.com:Datatamer/terraform-aws-es.git//modules/es-ports?ref=2.1.0"
+}
+
+data "aws_subnet" "application_subnet" {
+  id = var.ec2_subnet_id
 }
 
 module "aws-sg-es" {
