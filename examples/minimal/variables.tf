@@ -49,7 +49,7 @@ variable "emr_abac_valid_tags" {
   default     = {}
 }
 
-variable "emr_subnet_id" {
+variable "compute_subnet_id" {
   type        = string
   description = "Subnet ID for EMR cluster"
 }

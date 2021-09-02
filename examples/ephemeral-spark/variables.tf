@@ -36,7 +36,7 @@ variable "ec2_subnet_id" {
   description = "Subnet ID for Tamr VM"
 }
 
-variable "emr_subnet_id" {
+variable "compute_subnet_id" {
   type        = string
   description = "Subnet ID for EMR cluster"
 }

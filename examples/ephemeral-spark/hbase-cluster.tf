@@ -15,7 +15,7 @@ module "emr-hbase" {
   abac_valid_tags       = var.emr_abac_valid_tags
 
   # Networking
-  subnet_id = var.emr_subnet_id
+  subnet_id = var.compute_subnet_id
   vpc_id    = var.vpc_id
   # Security Group IDs
   emr_managed_master_sg_ids = module.aws-emr-sg-master.security_group_ids

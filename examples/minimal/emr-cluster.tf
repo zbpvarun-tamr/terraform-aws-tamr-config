@@ -15,7 +15,7 @@ module "emr" {
   abac_valid_tags       = var.emr_abac_valid_tags
 
   # Networking
-  subnet_id                 = var.emr_subnet_id
+  subnet_id                 = var.compute_subnet_id
   vpc_id                    = var.vpc_id
   emr_managed_master_sg_ids = module.aws-emr-sg-master.security_group_ids
   emr_managed_core_sg_ids   = module.aws-emr-sg-core.security_group_ids
