@@ -25,10 +25,12 @@ No requirements.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | ami\_id | AMI to use for Tamr EC2 instance | `string` | n/a | yes |
-| ec2\_subnet\_id | Subnet ID for ElasticSearch domain, Tamr VM, EMR cluster | `string` | n/a | yes |
+| data\_subnet\_ids | List of at least 2 subnet IDs in different AZs | `list(string)` | n/a | yes |
+| ec2\_subnet\_id | Subnet ID for Tamr VM | `string` | n/a | yes |
+| emr\_subnet\_id | Subnet ID for EMR cluster | `string` | n/a | yes |
 | license\_key | Tamr license key | `string` | n/a | yes |
-| rds\_subnet\_group\_ids | List of at least 2 subnet IDs in different AZs | `list(string)` | n/a | yes |
 | vpc\_id | VPC ID of deployment | `string` | n/a | yes |
+| egress\_cidr\_blocks | List of CIDR blocks from which ingress to ElasticSearch domain, Tamr VM, Tamr Postgres instance are allowed (i.e. VPN CIDR) | `list(string)` | <pre>[<br>  "0.0.0.0/0"<br>]</pre> | no |
 | emr\_abac\_valid\_tags | Valid tags for maintaining resources when using ABAC IAM Policies with Tag Conditions. Make sure `emr_tags` contain the values specified here and that your Subnet is tagged as well | `map(list(string))` | `{}` | no |
 | emr\_tags | Map of tags to add to EMR resources. They must contain abac\_valid\_tags at minimum | `map(string)` | `{}` | no |
 | ingress\_cidr\_blocks | List of CIDR blocks from which ingress to ElasticSearch domain, Tamr VM, Tamr Postgres instance are allowed (i.e. VPN CIDR) | `list(string)` | `[]` | no |
