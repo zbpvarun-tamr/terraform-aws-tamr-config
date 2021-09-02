@@ -44,7 +44,7 @@ module "aws-sg-es" {
 }
 
 data "aws_subnet" "application_subnet" {
-  id = var.ec2_subnet_id
+  id = var.application_subnet_id
 }
 
 data "aws_subnet" "data_subnet_es" {

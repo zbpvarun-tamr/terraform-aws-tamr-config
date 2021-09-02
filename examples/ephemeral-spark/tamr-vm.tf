@@ -18,7 +18,7 @@ module "tamr-vm" {
   ami                         = local.ami_id
   instance_type               = "r5.2xlarge"
   key_name                    = module.emr_key_pair.key_pair_key_name
-  subnet_id                   = var.ec2_subnet_id
+  subnet_id                   = var.application_subnet_id
   vpc_id                      = var.vpc_id
   security_group_ids          = module.aws-sg-vm.security_group_ids
   availability_zone           = data.aws_subnet.application_subnet.availability_zone

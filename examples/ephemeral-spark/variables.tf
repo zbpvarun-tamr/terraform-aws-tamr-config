@@ -31,7 +31,7 @@ variable "vpc_id" {
   description = "VPC ID of deployment"
 }
 
-variable "ec2_subnet_id" {
+variable "application_subnet_id" {
   type        = string
   description = "Subnet ID for Tamr VM"
 }

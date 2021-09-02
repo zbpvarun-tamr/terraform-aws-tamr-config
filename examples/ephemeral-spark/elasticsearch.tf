@@ -29,7 +29,7 @@ module "sg-ports-es" {
 }
 
 data "aws_subnet" "application_subnet" {
-  id = var.ec2_subnet_id
+  id = var.application_subnet_id
 }
 
 module "aws-sg-es" {
