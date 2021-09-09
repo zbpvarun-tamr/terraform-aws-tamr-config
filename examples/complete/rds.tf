@@ -15,9 +15,9 @@ module "rds-postgres" {
   postgres_name        = "tamr0"
   parameter_group_name = "${var.name_prefix}-rds-postgres-pg"
 
-  vpc_id = var.vpc_id
+  vpc_id = module.vpc.vpc_id
   # Network requirement: DB subnet group needs a subnet in at least two AZs
-  rds_subnet_ids = var.data_subnet_ids
+  rds_subnet_ids = module.vpc.data_subnet_ids
 
   security_group_ids = module.rds-postgres-sg.security_group_ids
   tags               = var.tags
@@ -29,7 +29,7 @@ module "sg-ports-rds" {
 
 module "rds-postgres-sg" {
   source                  = "git::git@github.com:Datatamer/terraform-aws-security-groups.git?ref=1.0.0"
-  vpc_id                  = var.vpc_id
+  vpc_id                  = module.vpc.vpc_id
   ingress_cidr_blocks     = var.ingress_cidr_blocks
   ingress_security_groups = module.aws-sg-vm.security_group_ids
   egress_cidr_blocks      = var.egress_cidr_blocks

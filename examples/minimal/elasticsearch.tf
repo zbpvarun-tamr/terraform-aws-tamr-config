@@ -29,9 +29,10 @@ module "sg-ports-es" {
 }
 
 module "aws-sg-es" {
-  source              = "git::git@github.com:Datatamer/terraform-aws-security-groups.git?ref=1.0.0"
-  vpc_id              = var.vpc_id
-  ingress_cidr_blocks = var.ingress_cidr_blocks
+  source                  = "git::git@github.com:Datatamer/terraform-aws-security-groups.git?ref=1.0.0"
+  vpc_id                  = var.vpc_id
+  ingress_cidr_blocks     = var.ingress_cidr_blocks
+  ingress_security_groups = concat(module.aws-sg-vm.security_group_ids, [module.emr.emr_managed_sg_id])
   egress_cidr_blocks = [
     "0.0.0.0/0"
   ]
@@ -43,7 +44,7 @@ module "aws-sg-es" {
 }
 
 data "aws_subnet" "application_subnet" {
-  id = var.ec2_subnet_id
+  id = var.application_subnet_id
 }
 
 data "aws_subnet" "data_subnet_es" {

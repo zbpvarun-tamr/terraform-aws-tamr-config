@@ -15,8 +15,8 @@ module "emr" {
   abac_valid_tags       = var.emr_abac_valid_tags
 
   # Networking
-  subnet_id                 = var.compute_subnet_id
-  vpc_id                    = var.vpc_id
+  subnet_id                 = module.vpc.compute_subnet_id
+  vpc_id                    = module.vpc.vpc_id
   emr_managed_master_sg_ids = module.aws-emr-sg-master.security_group_ids
   emr_managed_core_sg_ids   = module.aws-emr-sg-core.security_group_ids
   emr_service_access_sg_ids = module.aws-emr-sg-service-access.security_group_ids
@@ -59,7 +59,7 @@ module "sg-ports-emr" {
 
 module "aws-emr-sg-master" {
   source                  = "git::git@github.com:Datatamer/terraform-aws-security-groups.git?ref=1.0.0"
-  vpc_id                  = var.vpc_id
+  vpc_id                  = module.vpc.vpc_id
   ingress_cidr_blocks     = var.ingress_cidr_blocks
   ingress_security_groups = module.aws-sg-vm.security_group_ids
   egress_cidr_blocks      = var.egress_cidr_blocks
@@ -72,7 +72,7 @@ module "aws-emr-sg-master" {
 
 module "aws-emr-sg-core" {
   source                  = "git::git@github.com:Datatamer/terraform-aws-security-groups.git?ref=1.0.0"
-  vpc_id                  = var.vpc_id
+  vpc_id                  = module.vpc.vpc_id
   ingress_cidr_blocks     = var.ingress_cidr_blocks
   ingress_security_groups = module.aws-sg-vm.security_group_ids
   egress_cidr_blocks      = var.egress_cidr_blocks
@@ -85,7 +85,7 @@ module "aws-emr-sg-core" {
 
 module "aws-emr-sg-service-access" {
   source              = "git::git@github.com:Datatamer/terraform-aws-security-groups.git?ref=1.0.0"
-  vpc_id              = var.vpc_id
+  vpc_id              = module.vpc.vpc_id
   ingress_cidr_blocks = var.ingress_cidr_blocks
   ingress_ports       = module.sg-ports-emr.ingress_service_access_ports
   egress_cidr_blocks  = var.egress_cidr_blocks

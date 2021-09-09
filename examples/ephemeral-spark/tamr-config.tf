@@ -34,10 +34,10 @@ module "tamr-config" {
   # Spark
   spark_emr_cluster_id           = ""
   spark_cluster_log_uri          = "s3n://${module.s3-logs.bucket_name}/${var.path_to_spark_logs}"
-  spark_driver_memory            = "5G"
-  spark_executor_instances       = 15
-  spark_executor_memory          = "6G"
-  spark_executor_cores           = 1
+  spark_driver_memory            = "10G"
+  spark_executor_instances       = 7
+  spark_executor_memory          = "12G"
+  spark_executor_cores           = 2
   tamr_data_path                 = "tamr/unify-data"
   tamr_spark_config_override     = "[{'name' : 'sparkOverride1','executorInstances' : '2','sparkProps' : {'spark.cores.max' : '4'}},{'name' : 'sparkOverride2','driverMemory' : '4G','executorMemory' : '5G'}]"
   tamr_spark_properties_override = "{'spark.driver.maxResultSize':'4g'}"
@@ -47,7 +47,7 @@ module "tamr-config" {
   emr_instance_profile_name = module.ephemeral-spark-iam.emr_ec2_instance_profile_name
   emr_service_role_name     = module.ephemeral-spark-iam.emr_service_role_name
   emr_key_pair_name         = module.emr_key_pair.key_pair_key_name
-  emr_subnet_id             = var.ec2_subnet_id
+  emr_subnet_id             = var.compute_subnet_id
   master_instance_type      = "m4.large"
   master_ebs_volumes_count  = 1
   master_ebs_size           = 50

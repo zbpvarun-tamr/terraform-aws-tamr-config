@@ -14,6 +14,7 @@ module "ephemeral-spark-iam" {
     module.s3-logs.rw_policy_arn,
     module.s3-data.rw_policy_arn
   ]
+  vpc_id                        = var.vpc_id
   emr_ec2_iam_policy_name       = "${var.name_prefix}-spark-ec2-policy"
   emr_service_iam_policy_name   = "${var.name_prefix}-spark-service-policy"
   emr_service_role_name         = "${var.name_prefix}-spark-service-role"
