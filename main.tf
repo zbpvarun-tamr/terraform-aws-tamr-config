@@ -3,9 +3,9 @@ locals {
   template_config               = yamldecode(file(var.config_template_path)) # template config from yaml to map
   merged_config = (
     var.ephemeral_spark_configured ? (
-      merge(local.template_config, local.ephemeral_spark_vars, var.additional_templated_variables)
+      merge(local.template_config, local.ephemeral_spark_vars, local.elasticsearch_vars, var.additional_templated_variables)
       ) : (
-      merge(local.template_config, var.additional_templated_variables)
+      merge(local.template_config, local.elasticsearch_vars, var.additional_templated_variables)
     )
   ) # merge map(string)'s of template config, ephemeral spark variables if applicable (see ephemeral-spark-config.tf), and additional variables (if provided)
   s3_dist_cp     = var.tamr_backup_emr_cluster_id != "" ? "true" : "false"
