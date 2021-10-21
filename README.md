@@ -58,6 +58,7 @@ This module creates:
 | emr\_subnet\_id | ID of the subnet where the EMR cluster will be created. | `string` | `""` | no |
 | emr\_tags | Map of tags to add to new resources in EMR | `map(string)` | `{}` | no |
 | emrfs\_dynamodb\_table\_name | Name for the EMRFS DynamoDB table. | `string` | `""` | no |
+| es\_enabled | Whether or not to enable Elasticsearch by setting TAMR\_ES\_ENABLED flag | `bool` | `true` | no |
 | hbase\_config\_path | Path to HBase configuration in EMR root directory bucket. | `string` | `"config/hbase/conf.dist/"` | no |
 | hbase\_namespace | n/a | `string` | `"tamr"` | no |
 | hbase\_number\_of\_regions | Number of regions to create by default in HBase | `string` | `"1000"` | no |

@@ -155,6 +155,13 @@ variable "es_domain_endpoint" {
   description = "Endpoint of Elasticsearch domain."
 }
 
+variable "es_enabled" {
+  type        = bool
+  description = "Whether or not to enable Elasticsearch by setting TAMR_ES_ENABLED flag"
+  default     = true
+}
+
+
 #
 # FileSystem
 #
