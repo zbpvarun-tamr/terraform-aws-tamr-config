@@ -5,6 +5,9 @@
 *.tfstate
 *.tfstate.*
 
+# Terraform module lock files
+*.terraform.lock.hcl
+
 # Crash log files
 crash.log
 
@@ -40,3 +43,6 @@ ops-makefile
 
 # Ignore rendered-config.yml
 **/rendered-config.yml
+
+# Ignore tfvars
+**/*.tfvars
