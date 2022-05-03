@@ -37,7 +37,6 @@ module "tamr-vm" {
   emr_abac_valid_tags = var.emr_abac_valid_tags
 }
 
-
 module "aws-vm-sg-ports" {
   source = "git::git@github.com:Datatamer/terraform-aws-tamr-vm.git//modules/aws-security-groups?ref=4.4.0"
 }
