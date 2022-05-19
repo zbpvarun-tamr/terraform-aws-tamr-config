@@ -8,7 +8,7 @@ module "emr-hbase" {
   # Configurations
   create_static_cluster = true
   release_label         = "emr-6.6.0" # hbase 2.4.4
-  applications          = local.applications 
+  applications          = local.applications
   emr_config_file_path  = "${path.module}/emr.json"
   bucket_path_to_logs   = "logs/${var.name_prefix}-hbase"
   tags                  = merge(var.tags, var.emr_tags)
@@ -54,7 +54,7 @@ module "emr-hbase" {
 }
 
 module "sg-ports-emr" {
-  source = "git::git@github.com:Datatamer/terraform-aws-emr.git//modules/aws-emr-ports?ref=7.3.0"
+  source       = "git::git@github.com:Datatamer/terraform-aws-emr.git//modules/aws-emr-ports?ref=7.3.0"
   is_pre_6x    = false
   applications = local.applications
 }
