@@ -1,6 +1,6 @@
 # AWS Tamr Config Repo
 
-## v3.0.0 - May 16th 2022
+## v2.4.2 - May 16th 2022
 * Adds compatibility for tamr version v2022.002, which requires EMR 6 for hbase.
 
 ## v2.4.1 - April 27th 2022
