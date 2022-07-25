@@ -1,6 +1,6 @@
 # Set up logs bucket with read/write permissions
 module "s3-logs" {
-  source      = "git::git@github.com:Datatamer/terraform-aws-s3.git?ref=1.1.1"
+  source      = "git::git@github.com:Datatamer/terraform-aws-s3.git?ref=1.3.0"
   bucket_name = "${var.name_prefix}-logs"
   read_write_actions = [
     "s3:PutObject",
@@ -12,12 +12,13 @@ module "s3-logs" {
     "s3:CreateJob",
     "s3:HeadBucket"
   ]
-  read_write_paths = [""] # r/w policy permitting specified rw actions on entire bucket
+  read_write_paths  = [""] # r/w policy permitting specified rw actions on entire bucket
+  s3_bucket_logging = var.s3_bucket_logging
 }
 
 # Set up root directory bucket
 module "s3-data" {
-  source      = "git::git@github.com:Datatamer/terraform-aws-s3.git?ref=1.1.1"
+  source      = "git::git@github.com:Datatamer/terraform-aws-s3.git?ref=1.3.0"
   bucket_name = "${var.name_prefix}-data"
   read_write_actions = [
     "s3:GetBucketLocation",
@@ -40,5 +41,6 @@ module "s3-data" {
     "s3:AbortMultipartUpload",
     "s3:CreateJob"
   ]
-  read_write_paths = [""] # r/w policy permitting default rw actions on entire bucket
+  read_write_paths  = [""] # r/w policy permitting default rw actions on entire bucket
+  s3_bucket_logging = var.s3_bucket_logging
 }
