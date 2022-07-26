@@ -77,7 +77,7 @@ variable "create_new_service_role" {
 }
 
 variable "s3_bucket_logging" {
-  description = "The name of S3 bucket where to store S3 server access logs."
+  description = "The name of an existing S3 bucket where to store S3 server access logs."
   type        = string
   default     = ""
 }
