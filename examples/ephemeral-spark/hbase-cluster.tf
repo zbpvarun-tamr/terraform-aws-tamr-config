@@ -10,7 +10,7 @@ module "emr-hbase" {
   release_label         = "emr-6.6.0" # hbase 2.4.4
   applications          = local.applications
   emr_config_file_path  = "${path.module}/../emr.json"
-  bucket_path_to_logs   = "logs/${var.name_prefix}-hbase"
+  bucket_path_to_logs   = "logs/${var.name_prefix}-hbase/"
   tags                  = merge(var.tags, var.emr_tags)
   abac_valid_tags       = var.emr_abac_valid_tags
 

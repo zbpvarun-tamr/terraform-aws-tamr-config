@@ -8,4 +8,5 @@ compute_subnet_id     = "subnet-us-east-1b" # Replace me
 data_subnet_ids = [
   "subnet-us-east-1a",
   "subnet-us-east-1b",
-] # Replace me with subnet IDs in different AZs
+]                                        # Replace me with subnet IDs in different AZs
+s3_bucket_logging = "example-log-bucket" # Replace me with an existing bucket
