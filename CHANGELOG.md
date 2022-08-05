@@ -1,5 +1,8 @@
 # AWS Tamr Config Repo
 
+## v2.4.5 - August 5th 2022
+* Removes requirement on AWS provider
+
 ## v2.4.4 - June 16th 2022
 * Allows `emr_service_access_sg_id` to make it visible in the render file.
 

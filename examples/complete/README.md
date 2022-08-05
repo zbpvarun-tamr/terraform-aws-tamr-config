@@ -2,7 +2,7 @@ This example demonstrates a terraform-generated Tamr config for a full aws-scale
 - static EMR deployment running both HBase and Spark
 - data bucket and logs bucket shared by both HBase and Spark
 - newly-generated EC2 key pair (used by both Tamr VM and EMR EC2 instances)
-- Elasticsearch domain
+- OpenSearch domain
 - RDS Postgres instance
 - Tamr VM deployment
 - VPC with 4 subnets according to reference network architecture
