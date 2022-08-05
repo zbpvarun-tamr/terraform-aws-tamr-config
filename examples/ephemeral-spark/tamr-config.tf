@@ -1,5 +1,5 @@
 module "tamr-config" {
-  #   source = "git::git@github.com:Datatamer/terraform-aws-tamr-config?ref=2.3.0"
+  #   source = "git::git@github.com:Datatamer/terraform-aws-tamr-config?ref=2.4.5"
   source = "../.."
 
   config_template_path       = "../../tamr-config.yml"
@@ -29,9 +29,6 @@ module "tamr-config" {
   # ElasticSearch
   es_domain_endpoint = module.tamr-es-cluster.tamr_es_domain_endpoint
 
-  # ESP
-  tamr_external_storage_providers = "[{'name' : 's3a_tamr_config_test','description' : 'The S3a filesystem at root of ${module.s3-data.bucket_name}','uri' : 's3a://${module.s3-data.bucket_name}/'}]"
-
   # Spark
   spark_emr_cluster_id           = ""
   spark_cluster_log_uri          = "s3n://${module.s3-logs.bucket_name}/${var.path_to_spark_logs}"
@@ -40,7 +37,6 @@ module "tamr-config" {
   spark_executor_memory          = "12G"
   spark_executor_cores           = 2
   tamr_data_path                 = "tamr/unify-data"
-  tamr_spark_config_override     = "[{'name' : 'sparkOverride1','executorInstances' : '2','sparkProps' : {'spark.cores.max' : '4'}},{'name' : 'sparkOverride2','driverMemory' : '4G','executorMemory' : '5G'}]"
   tamr_spark_properties_override = "{'spark.driver.maxResultSize':'4g'}"
 
   # Ephemeral Spark
@@ -66,6 +62,9 @@ module "tamr-config" {
   # emr_managed_core_sg_id   = "" # you may leave this blank and AWS creates one automatically
   emr_additional_core_sg_id = join(",", module.aws-emr-sg-master.security_group_ids)
   emr_service_access_sg_id  = module.aws-emr-sg-service-access.security_group_ids[0]
+
+  # Data Movement
+  apps_dms_enabled = false
 }
 
 # Upload the Tamr configuration to S3
