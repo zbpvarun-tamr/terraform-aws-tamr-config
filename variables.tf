@@ -367,3 +367,9 @@ variable "emr_tags" {
   description = "Map of tags to add to new resources in EMR"
   default     = {}
 }
+
+variable "emr_cluster_name_prefix" {
+  type        = string
+  description = "A prefix to add to the name of created EMR Spark clusters"
+  default     = "tamr-emr-"
+}

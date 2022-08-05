@@ -63,3 +63,4 @@ APPS_DMS_DEFAULT_CLOUD_PROVIDER: ${apps_dms_default_cloud_provider}
 
 # EMR
 TAMR_DATASET_EMR_CLUSTER_TAGS: ${tamr_dataset_emr_cluster_tags}
+TAMR_DATASET_EMR_CLUSTER_NAME_PREFIX: ${tamr_dataset_emr_cluster_name_prefix}

@@ -46,6 +46,7 @@ This module creates:
 | core\_instance\_type | The EC2 instance type of the core nodes. | `string` | `""` | no |
 | emr\_additional\_core\_sg\_id | Security group ID of the EMR Additional Core Security Group. | `string` | `""` | no |
 | emr\_additional\_master\_sg\_id | Security group ID of the EMR Additional Master Security Group. | `string` | `""` | no |
+| emr\_cluster\_name\_prefix | A prefix to add to the name of created EMR Spark clusters | `string` | `"tamr-emr-"` | no |
 | emr\_instance\_profile\_name | Name of instance profile for EMR EC2 instances. | `string` | `""` | no |
 | emr\_key\_pair\_name | Name of the Key Pair that will be attached to the EMR EC2 instances. | `string` | `""` | no |
 | emr\_managed\_core\_sg\_id | Security group ID of the EMR Managed Core Security Group. | `string` | `""` | no |
