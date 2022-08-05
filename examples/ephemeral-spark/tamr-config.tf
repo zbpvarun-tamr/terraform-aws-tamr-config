@@ -27,7 +27,7 @@ module "tamr-config" {
   hbase_config_path = module.emr-hbase.hbase_config_path
 
   # ElasticSearch
-  es_domain_endpoint = module.tamr-es-cluster.tamr_es_domain_endpoint
+  es_domain_endpoint = module.tamr-opensearch-cluster.tamr_es_domain_endpoint
 
   # Spark
   spark_emr_cluster_id           = ""

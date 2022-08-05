@@ -5,7 +5,7 @@ resource "random_password" "rds-password" {
 }
 
 module "rds-postgres" {
-  source = "git::git@github.com:Datatamer/terraform-aws-rds-postgres.git?ref=3.1.0"
+  source = "git::git@github.com:Datatamer/terraform-aws-rds-postgres.git?ref=4.0.1"
 
   identifier_prefix = "${var.name_prefix}-"
   username          = "tamr"
@@ -15,7 +15,6 @@ module "rds-postgres" {
   postgres_name        = "tamr0"
   parameter_group_name = "${var.name_prefix}-rds-postgres-pg"
 
-  vpc_id = var.vpc_id
   # Network requirement: DB subnet group needs a subnet in at least two AZs
   rds_subnet_ids = var.data_subnet_ids
 
@@ -24,11 +23,11 @@ module "rds-postgres" {
 }
 
 module "sg-ports-rds" {
-  source = "git::git@github.com:Datatamer/terraform-aws-rds-postgres.git//modules/rds-postgres-ports?ref=3.1.0"
+  source = "git::git@github.com:Datatamer/terraform-aws-rds-postgres.git//modules/rds-postgres-ports?ref=4.0.1"
 }
 
 module "rds-postgres-sg" {
-  source                  = "git::git@github.com:Datatamer/terraform-aws-security-groups.git?ref=1.0.0"
+  source                  = "git::git@github.com:Datatamer/terraform-aws-security-groups.git?ref=1.0.1"
   vpc_id                  = var.vpc_id
   ingress_cidr_blocks     = var.ingress_cidr_blocks
   ingress_security_groups = module.aws-sg-vm.security_group_ids

@@ -1,9 +1,8 @@
-module "tamr-es-cluster" {
-  source = "git::git@github.com:Datatamer/terraform-aws-es?ref=3.1.0"
+module "tamr-opensearch-cluster" {
+  source = "git::git@github.com:Datatamer/terraform-aws-opensearch?ref=5.0.0"
 
   # Names
-  domain_name = "${var.name_prefix}-es"
-  sg_name     = "${var.name_prefix}-es-security-group"
+  domain_name = "${var.name_prefix}-opensearch"
 
   # In-transit encryption options
   node_to_node_encryption_enabled = true
@@ -12,33 +11,28 @@ module "tamr-es-cluster" {
   # Networking
   vpc_id             = var.vpc_id
   subnet_ids         = [var.data_subnet_ids[0]]
-  security_group_ids = module.aws-sg-es.security_group_ids
-  # CIDR blocks to allow ingress from (i.e. VPN)
-  ingress_cidr_blocks = var.ingress_cidr_blocks
-  aws_region          = data.aws_region.current.name
+  security_group_ids = module.aws-sg-opensearch.security_group_ids
 }
 
-data "aws_region" "current" {}
-
 # Security Groups
-module "sg-ports-es" {
-  source = "git::git@github.com:Datatamer/terraform-aws-es.git//modules/es-ports?ref=3.1.0"
+module "sg-ports-opensearch" {
+  source = "git::git@github.com:Datatamer/terraform-aws-es.git//modules/es-ports?ref=5.0.0"
 }
 
 data "aws_subnet" "application_subnet" {
   id = var.application_subnet_id
 }
 
-module "aws-sg-es" {
-  source                  = "git::git@github.com:Datatamer/terraform-aws-security-groups.git?ref=1.0.0"
+module "aws-sg-opensearch" {
+  source                  = "git::git@github.com:Datatamer/terraform-aws-security-groups.git?ref=1.0.1"
   vpc_id                  = var.vpc_id
   ingress_cidr_blocks     = var.ingress_cidr_blocks
   ingress_security_groups = concat(module.aws-sg-vm.security_group_ids, [module.ephemeral-spark-sgs.emr_managed_sg_id])
   egress_cidr_blocks = [
     "0.0.0.0/0"
   ]
-  ingress_ports    = module.sg-ports-es.ingress_ports
-  sg_name_prefix   = format("%s-%s", var.name_prefix, "-es")
+  ingress_ports    = module.sg-ports-opensearch.ingress_ports
+  sg_name_prefix   = format("%s-%s", var.name_prefix, "-os")
   tags             = var.tags
   ingress_protocol = "tcp"
   egress_protocol  = "all"

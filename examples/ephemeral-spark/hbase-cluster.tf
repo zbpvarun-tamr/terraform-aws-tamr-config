@@ -3,7 +3,7 @@ locals {
 }
 # EMR Static HBase cluster
 module "emr-hbase" {
-  source = "git@github.com:Datatamer/terraform-aws-emr.git?ref=7.3.0"
+  source = "git@github.com:Datatamer/terraform-aws-emr.git?ref=7.3.3"
 
   # Configurations
   create_static_cluster = true
@@ -58,7 +58,7 @@ module "sg-ports-emr" {
 }
 
 module "aws-emr-sg-master" {
-  source                  = "git::git@github.com:Datatamer/terraform-aws-security-groups.git?ref=1.0.0"
+  source                  = "git::git@github.com:Datatamer/terraform-aws-security-groups.git?ref=1.0.1"
   vpc_id                  = var.vpc_id
   ingress_cidr_blocks     = var.ingress_cidr_blocks
   ingress_security_groups = concat(module.aws-sg-vm.security_group_ids, [module.ephemeral-spark-sgs.emr_managed_sg_id])
@@ -71,7 +71,7 @@ module "aws-emr-sg-master" {
 }
 
 module "aws-emr-sg-core" {
-  source                  = "git::git@github.com:Datatamer/terraform-aws-security-groups.git?ref=1.0.0"
+  source                  = "git::git@github.com:Datatamer/terraform-aws-security-groups.git?ref=1.0.1"
   vpc_id                  = var.vpc_id
   ingress_cidr_blocks     = var.ingress_cidr_blocks
   ingress_security_groups = concat(module.aws-sg-vm.security_group_ids, [module.ephemeral-spark-sgs.emr_managed_sg_id])
@@ -84,7 +84,7 @@ module "aws-emr-sg-core" {
 }
 
 module "aws-emr-sg-service-access" {
-  source              = "git::git@github.com:Datatamer/terraform-aws-security-groups.git?ref=1.0.0"
+  source              = "git::git@github.com:Datatamer/terraform-aws-security-groups.git?ref=1.0.1"
   vpc_id              = var.vpc_id
   ingress_cidr_blocks = var.ingress_cidr_blocks
   egress_cidr_blocks  = var.egress_cidr_blocks

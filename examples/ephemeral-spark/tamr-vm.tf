@@ -13,7 +13,7 @@ data "aws_ami" "tamr-vm" {
 }
 
 module "tamr-vm" {
-  source = "git::git@github.com:Datatamer/terraform-aws-tamr-vm.git?ref=4.4.2"
+  source = "git::git@github.com:Datatamer/terraform-aws-tamr-vm.git?ref=4.4.3"
 
   ami                         = local.ami_id
   instance_type               = "r5.2xlarge"
@@ -41,19 +41,17 @@ module "tamr-vm" {
 
 
 module "aws-vm-sg-ports" {
-  source = "git::git@github.com:Datatamer/terraform-aws-tamr-vm.git//modules/aws-security-groups?ref=4.4.0"
+  source = "git::git@github.com:Datatamer/terraform-aws-tamr-vm.git//modules/aws-security-groups?ref=4.4.3"
 }
 
 module "aws-sg-vm" {
-  source              = "git::git@github.com:Datatamer/terraform-aws-security-groups.git?ref=1.0.0"
+  source              = "git::git@github.com:Datatamer/terraform-aws-security-groups.git?ref=1.0.1"
   vpc_id              = var.vpc_id
   ingress_cidr_blocks = var.ingress_cidr_blocks
-  egress_cidr_blocks = [
-    "0.0.0.0/0" # TODO: scope down
-  ]
-  ingress_protocol = "tcp"
-  egress_protocol  = "all"
-  ingress_ports    = concat(module.aws-vm-sg-ports.ingress_ports, module.sg-ports-es.ingress_ports)
-  sg_name_prefix   = format("%s-%s", var.name_prefix, "tamr-vm")
-  tags             = var.tags
+  egress_cidr_blocks  = var.egress_cidr_blocks
+  ingress_protocol    = "tcp"
+  egress_protocol     = "all"
+  ingress_ports       = module.aws-vm-sg-ports.ingress_ports
+  sg_name_prefix      = format("%s-%s", var.name_prefix, "tamr-vm")
+  tags                = var.tags
 }
