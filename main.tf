@@ -47,7 +47,6 @@ data "template_file" "tamr_config" {
     apps_dms_enabled                        = var.apps_dms_enabled, # DMS
     apps_dms_default_cloud_provider         = var.apps_dms_default_cloud_provider
     tamr_dataset_emr_cluster_tags           = local.tamr_dataset_emr_cluster_tags
-    tamr_dataset_emr_cluster_name_prefix    = var.emr_cluster_name_prefix
   }
 }
 
