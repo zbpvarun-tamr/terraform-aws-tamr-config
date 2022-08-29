@@ -23,5 +23,7 @@ locals {
     "TAMR_DATASET_EMR_WORKER_SECURITY_GROUP_ADDITIONAL" : var.emr_additional_core_sg_id,
     "TAMR_EMRFS_DYNAMO_TABLE" : var.emrfs_dynamodb_table_name,
     "TAMR_DATASET_EMR_ROOT_VOLUME_SIZE" : var.emr_root_volume_size,
+    "TAMR_DATASET_EMR_CLUSTER_NAME_PREFIX" : var.emr_cluster_name_prefix,
+    "TAMR_DATASET_EMR_CLUSTER_TAGS" : join(",", flatten([for i, k in var.emr_tags : concat([i], [k])]))
   }
 }

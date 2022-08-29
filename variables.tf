@@ -312,6 +312,18 @@ variable "emr_root_volume_size" {
   description = "The size, in GiB, of the EBS root device volume of the Linux AMI that is used for each EMR EC2 instance."
 }
 
+variable "emr_tags" {
+  type        = map(string)
+  description = "Map of tags to add to new resources in EMR"
+  default     = {}
+}
+
+variable "emr_cluster_name_prefix" {
+  type        = string
+  description = "A prefix to add to the name of created EMR Spark clusters"
+  default     = "tamr-emr-"
+}
+
 #
 # Backup Config
 #
@@ -360,10 +372,4 @@ variable "apps_dms_default_cloud_provider" {
   type        = string
   description = "Defines the default cloud service provider for DMS when `APPS_DMS_ENABLED` is set to `true`"
   default     = "s3"
-}
-
-variable "emr_tags" {
-  type        = map(string)
-  description = "Map of tags to add to new resources in EMR"
-  default     = {}
 }
