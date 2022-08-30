@@ -1,5 +1,5 @@
 module "tamr-opensearch-cluster" {
-  source = "git::git@github.com:Datatamer/terraform-aws-opensearch?ref=5.0.0"
+  source = "git::git@github.com:Datatamer/terraform-aws-opensearch?ref=6.0.0"
 
   # Names
   domain_name = "${var.name_prefix}-opensearch"
@@ -9,7 +9,6 @@ module "tamr-opensearch-cluster" {
   enforce_https                   = true
 
   # Networking
-  vpc_id             = var.vpc_id
   subnet_ids         = [var.data_subnet_ids[0]]
   security_group_ids = module.aws-sg-opensearch.security_group_ids
 }
@@ -28,14 +27,12 @@ module "aws-sg-opensearch" {
   vpc_id                  = var.vpc_id
   ingress_cidr_blocks     = var.ingress_cidr_blocks
   ingress_security_groups = concat(module.aws-sg-vm.security_group_ids, [module.ephemeral-spark-sgs.emr_managed_sg_id])
-  egress_cidr_blocks = [
-    "0.0.0.0/0"
-  ]
-  ingress_ports    = module.sg-ports-opensearch.ingress_ports
-  sg_name_prefix   = format("%s-%s", var.name_prefix, "-os")
-  tags             = var.tags
-  ingress_protocol = "tcp"
-  egress_protocol  = "all"
+  egress_cidr_blocks      = var.egress_cidr_blocks
+  ingress_ports           = module.sg-ports-opensearch.ingress_ports
+  sg_name_prefix          = format("%s-%s", var.name_prefix, "-os")
+  tags                    = var.tags
+  ingress_protocol        = "tcp"
+  egress_protocol         = "all"
 }
 
 # Only needed once per account, set `create_new_service_role` variable to true if first time running in account

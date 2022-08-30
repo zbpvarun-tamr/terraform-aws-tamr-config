@@ -13,13 +13,12 @@ data "aws_ami" "tamr-vm" {
 }
 
 module "tamr-vm" {
-  source = "git::git@github.com:Datatamer/terraform-aws-tamr-vm.git?ref=4.4.3"
+  source = "git::git@github.com:Datatamer/terraform-aws-tamr-vm.git?ref=5.0.0"
 
   ami                         = local.ami_id
   instance_type               = "r5.2xlarge"
   key_name                    = module.emr_key_pair.key_pair_key_name
   subnet_id                   = var.application_subnet_id
-  vpc_id                      = var.vpc_id
   security_group_ids          = module.aws-sg-vm.security_group_ids
   availability_zone           = data.aws_subnet.application_subnet.availability_zone
   aws_role_name               = "${var.name_prefix}-tamr-ec2-role"
@@ -41,7 +40,7 @@ module "tamr-vm" {
 
 
 module "aws-vm-sg-ports" {
-  source = "git::git@github.com:Datatamer/terraform-aws-tamr-vm.git//modules/aws-security-groups?ref=4.4.3"
+  source = "git::git@github.com:Datatamer/terraform-aws-tamr-vm.git//modules/aws-security-groups?ref=5.0.0"
 }
 
 module "aws-sg-vm" {

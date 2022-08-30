@@ -1,5 +1,5 @@
 module "tamr-config" {
-  #   source = "git::git@github.com:Datatamer/terraform-aws-tamr-config?ref=2.4.5"
+  #   source = "git::git@github.com:Datatamer/terraform-aws-tamr-config?ref=2.5.0"
   source = "../.."
 
   config_template_path       = "../../tamr-config.yml"
@@ -20,15 +20,15 @@ module "tamr-config" {
   tamr_data_bucket  = module.s3-data.bucket_name
   hbase_config_path = module.emr.hbase_config_path
 
-  spark_emr_cluster_id            = module.emr.tamr_emr_cluster_id
-  spark_cluster_log_uri           = module.emr.log_uri
-  tamr_data_path                  = "tamr/unify-data"
-  tamr_spark_properties_override  = "{'spark.driver.maxResultSize':'4g'}"
-  es_domain_endpoint              = module.tamr-opensearch-cluster.tamr_es_domain_endpoint
-  spark_driver_memory             = "10G"
-  spark_executor_cores            = "4"
-  spark_executor_instances        = 8
-  spark_executor_memory           = "16G"
+  spark_emr_cluster_id           = module.emr.tamr_emr_cluster_id
+  spark_cluster_log_uri          = module.emr.log_uri
+  tamr_data_path                 = "tamr/unify-data"
+  tamr_spark_properties_override = "{'spark.driver.maxResultSize':'4g'}"
+  es_domain_endpoint             = module.tamr-opensearch-cluster.tamr_es_domain_endpoint
+  spark_driver_memory            = "10G"
+  spark_executor_cores           = "4"
+  spark_executor_instances       = 8
+  spark_executor_memory          = "16G"
 
   # Backup
   tamr_backup_emr_cluster_id = module.emr.tamr_emr_cluster_id

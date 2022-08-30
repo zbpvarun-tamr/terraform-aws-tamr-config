@@ -47,8 +47,8 @@ No requirements.
 | Name | Description |
 |------|-------------|
 | ec2-key | n/a |
-| elasticsearch | n/a |
 | emr | n/a |
+| opensearch | n/a |
 | private-key | n/a |
 | rds-postgres | n/a |
 | rds-pw | n/a |

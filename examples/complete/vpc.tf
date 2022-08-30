@@ -14,7 +14,7 @@ data "aws_availability_zones" "available" {
 data "aws_region" "current" {}
 
 module "vpc" {
-  source             = "git::https://github.com/Datatamer/terraform-aws-networking.git?ref=1.2.1"
+  source             = "git::https://github.com/Datatamer/terraform-aws-networking.git?ref=2.0.0"
   availability_zones = local.azs
   name_prefix        = var.name_prefix
   tags               = merge(var.tags, var.emr_tags)

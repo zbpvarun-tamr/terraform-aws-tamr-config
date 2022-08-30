@@ -46,11 +46,10 @@ No requirements.
 | Name | Description |
 |------|-------------|
 | ec2-key | n/a |
-| elasticsearch | n/a |
 | emr-hbase | n/a |
-| ephemeral-spark-config | n/a |
 | ephemeral-spark-iam | n/a |
 | ephemeral-spark-sgs | n/a |
+| opensearch | n/a |
 | private-key | n/a |
 | rds-postgres | n/a |
 | rds-pw | n/a |

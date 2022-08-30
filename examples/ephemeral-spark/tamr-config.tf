@@ -9,7 +9,6 @@ module "tamr-config" {
     "TAMR_LICENSE_KEY" : var.license_key
   }
   emr_tags                             = var.emr_tags
-  tamr_dataset_emr_cluster_name_prefix = var.name_prefix
 
   # Backup
   tamr_backup_emr_cluster_id = module.emr-hbase.tamr_emr_cluster_id

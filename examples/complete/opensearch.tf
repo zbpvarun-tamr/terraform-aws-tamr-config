@@ -1,5 +1,5 @@
 module "tamr-opensearch-cluster" {
-  source = "git::git@github.com:Datatamer/terraform-aws-opensearch?ref=5.0.0"
+  source = "git::git@github.com:Datatamer/terraform-aws-opensearch?ref=6.0.0"
 
   # Names
   domain_name = "${var.name_prefix}-opensearch"
@@ -9,14 +9,13 @@ module "tamr-opensearch-cluster" {
   enforce_https                   = true
 
   # Networking
-  vpc_id             = module.vpc.vpc_id
   subnet_ids         = [data.aws_subnet.data_subnet_es.id]
   security_group_ids = module.aws-sg-opensearch.security_group_ids
 }
 
 # Security Groups
 module "sg-ports-opensearch" {
-  source = "git::git@github.com:Datatamer/terraform-aws-opensearch.git//modules/es-ports?ref=5.0.0"
+  source = "git::git@github.com:Datatamer/terraform-aws-opensearch.git//modules/es-ports?ref=6.0.0"
 }
 
 module "aws-sg-opensearch" {
