@@ -8,7 +8,7 @@ module "tamr-config" {
   additional_templated_variables = {
     "TAMR_LICENSE_KEY" : var.license_key
   }
-  emr_tags                             = var.emr_tags
+  emr_tags = var.emr_tags
 
   # Backup
   tamr_backup_emr_cluster_id = module.emr-hbase.tamr_emr_cluster_id
