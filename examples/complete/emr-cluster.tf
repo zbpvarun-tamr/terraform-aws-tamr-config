@@ -6,6 +6,8 @@ locals {
 module "emr" {
   source = "git@github.com:Datatamer/terraform-aws-emr.git?ref=9.0.0"
 
+  depends_on = [module.vpc]
+
   # Configurations
   create_static_cluster = true
   release_label         = "emr-5.29.0" # spark 2.4.4, hbase 1.4.10
