@@ -17,7 +17,7 @@ module "examples_minimal" {
 }
 
 module "vpc" {
-  source = "git::https://github.com/Datatamer/terraform-aws-networking.git?ref=0.1.0"
+  source = "git::https://github.com/Datatamer/terraform-aws-networking.git?ref=2.0.0"
 
   ingress_cidr_blocks           = var.ingress_cidr_blocks
   vpc_cidr_block                = "172.31.0.0/20"
@@ -33,6 +33,9 @@ module "vpc" {
     "application" : "tamr",
     "Terraform" : "true"
   }
+  interface_endpoint_ingress_sg = module.examples_minimal.aws-sg-vm.security_group_ids[0]
+  name_prefix                   = var.name_prefix
+
 }
 
 data "aws_region" "current" {}

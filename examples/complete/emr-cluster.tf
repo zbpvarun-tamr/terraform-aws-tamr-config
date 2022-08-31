@@ -4,7 +4,9 @@ locals {
 
 # EMR Static HBase,Spark cluster
 module "emr" {
-  source = "git@github.com:Datatamer/terraform-aws-emr.git?ref=7.3.1"
+  source = "git@github.com:Datatamer/terraform-aws-emr.git?ref=9.0.0"
+
+  depends_on = [module.vpc]
 
   # Configurations
   create_static_cluster = true
@@ -45,11 +47,9 @@ module "emr" {
   emr_ec2_role_name             = "${var.name_prefix}-ec2-role"
   emr_ec2_instance_profile_name = "${var.name_prefix}-emr-instance-profile"
   emr_service_iam_policy_name   = "${var.name_prefix}-service-policy"
-  emr_ec2_iam_policy_name       = "${var.name_prefix}-ec2-policy"
   master_instance_fleet_name    = "${var.name_prefix}-MasterInstanceFleet"
   core_instance_fleet_name      = "${var.name_prefix}-CoreInstanceFleet"
   emr_managed_sg_name           = "${var.name_prefix}-EMR-Managed"
-  emr_service_access_sg_name    = "${var.name_prefix}-EMR-Service-Access"
 
   # Scale
   master_instance_on_demand_count = 1
@@ -61,13 +61,13 @@ module "emr" {
 }
 
 module "sg-ports-emr" {
-  source = "git::git@github.com:Datatamer/terraform-aws-emr.git//modules/aws-emr-ports?ref=7.3.1"
+  source = "git::git@github.com:Datatamer/terraform-aws-emr.git//modules/aws-emr-ports?ref=9.0.0"
 
   applications = local.applications
 }
 
 module "aws-emr-sg-master" {
-  source                  = "git::git@github.com:Datatamer/terraform-aws-security-groups.git?ref=1.0.0"
+  source                  = "git::git@github.com:Datatamer/terraform-aws-security-groups.git?ref=1.0.1"
   vpc_id                  = module.vpc.vpc_id
   ingress_cidr_blocks     = var.ingress_cidr_blocks
   ingress_security_groups = module.aws-sg-vm.security_group_ids
@@ -80,7 +80,7 @@ module "aws-emr-sg-master" {
 }
 
 module "aws-emr-sg-core" {
-  source                  = "git::git@github.com:Datatamer/terraform-aws-security-groups.git?ref=1.0.0"
+  source                  = "git::git@github.com:Datatamer/terraform-aws-security-groups.git?ref=1.0.1"
   vpc_id                  = module.vpc.vpc_id
   ingress_cidr_blocks     = var.ingress_cidr_blocks
   ingress_security_groups = module.aws-sg-vm.security_group_ids
@@ -93,7 +93,7 @@ module "aws-emr-sg-core" {
 }
 
 module "aws-emr-sg-service-access" {
-  source              = "git::git@github.com:Datatamer/terraform-aws-security-groups.git?ref=1.0.0"
+  source              = "git::git@github.com:Datatamer/terraform-aws-security-groups.git?ref=1.0.1"
   vpc_id              = module.vpc.vpc_id
   ingress_cidr_blocks = var.ingress_cidr_blocks
   ingress_ports       = module.sg-ports-emr.ingress_service_access_ports

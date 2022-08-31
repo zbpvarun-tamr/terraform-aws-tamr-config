@@ -32,3 +32,7 @@ output "tamr-config" {
   value     = module.tamr-config.rendered
   sensitive = true
 }
+
+output "aws-sg-vm" {
+  value = module.aws-sg-vm
+}
