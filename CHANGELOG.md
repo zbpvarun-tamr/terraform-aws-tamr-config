@@ -1,8 +1,7 @@
 # AWS Tamr Config Repo
-* Adds variable `emr_cluster_name_prefix` that is passed to the config `TAMR_DATASET_EMR_CLUSTER_NAME_PREFIX` in the file
 
 ## v2.5.0 - August 29th 2022
-* add variable for specifying TAMR_DATASET_EMR_CLUSTER_NAME_PREFIX
+* Adds variable `emr_cluster_name_prefix` that is passed to the config `TAMR_DATASET_EMR_CLUSTER_NAME_PREFIX` in the file
 
 ## v2.4.5 - August 5th 2022
 * Removes requirement on AWS provider
