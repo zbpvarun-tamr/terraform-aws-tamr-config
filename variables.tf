@@ -324,6 +324,12 @@ variable "emr_cluster_name_prefix" {
   default     = "tamr-emr-"
 }
 
+variable "emr_security_configuration" {
+  type        = string
+  description = "Security configuration to attach to created EMR Spark clusters. Supported in Tamr v2022.009.0 and later."
+  default     = ""
+}
+
 #
 # Backup Config
 #

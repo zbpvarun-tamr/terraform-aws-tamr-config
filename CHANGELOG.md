@@ -1,5 +1,8 @@
 # AWS Tamr Config Repo
 
+## v2.6.0 - September 14th 2022
+* Adds variable `emr_security_configuration` that is passed to the config `TAMR_DATASET_EMR_SECURITY_CONFIGURATION`
+
 ## v2.5.0 - August 29th 2022
 * Adds variable `emr_cluster_name_prefix` that is passed to the config `TAMR_DATASET_EMR_CLUSTER_NAME_PREFIX` in the file
 
