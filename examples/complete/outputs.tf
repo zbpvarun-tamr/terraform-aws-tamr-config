@@ -11,8 +11,8 @@ output "rds-pw" {
   sensitive = true
 }
 
-output "elasticsearch" {
-  value = module.tamr-es-cluster
+output "opensearch" {
+  value = module.tamr-opensearch-cluster
 }
 
 output "ec2-key" {

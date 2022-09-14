@@ -1,41 +1,34 @@
-module "tamr-es-cluster" {
-  source = "git::git@github.com:Datatamer/terraform-aws-es?ref=3.1.0"
+module "tamr-opensearch-cluster" {
+  source = "git::git@github.com:Datatamer/terraform-aws-opensearch?ref=6.0.0"
 
   # Names
-  domain_name = "${var.name_prefix}-es"
-  sg_name     = "${var.name_prefix}-es-security-group"
+  domain_name = "${var.name_prefix}-opensearch"
 
   # In-transit encryption options
   node_to_node_encryption_enabled = true
   enforce_https                   = true
 
   # Networking
-  vpc_id             = module.vpc.vpc_id
   subnet_ids         = [data.aws_subnet.data_subnet_es.id]
-  security_group_ids = module.aws-sg-es.security_group_ids
-  # CIDR blocks to allow ingress from (i.e. VPN)
-  ingress_cidr_blocks = var.ingress_cidr_blocks
-  aws_region          = data.aws_region.current.name
+  security_group_ids = module.aws-sg-opensearch.security_group_ids
 }
 
 # Security Groups
-module "sg-ports-es" {
-  source = "git::git@github.com:Datatamer/terraform-aws-es.git//modules/es-ports?ref=3.1.0"
+module "sg-ports-opensearch" {
+  source = "git::git@github.com:Datatamer/terraform-aws-opensearch.git//modules/es-ports?ref=6.0.0"
 }
 
-module "aws-sg-es" {
-  source                  = "git::git@github.com:Datatamer/terraform-aws-security-groups.git?ref=1.0.0"
+module "aws-sg-opensearch" {
+  source                  = "git::git@github.com:Datatamer/terraform-aws-security-groups.git?ref=1.0.1"
   vpc_id                  = module.vpc.vpc_id
   ingress_cidr_blocks     = var.ingress_cidr_blocks
   ingress_security_groups = concat(module.aws-sg-vm.security_group_ids, [module.emr.emr_managed_sg_id])
-  egress_cidr_blocks = [
-    "0.0.0.0/0"
-  ]
-  ingress_ports    = module.sg-ports-es.ingress_ports
-  sg_name_prefix   = format("%s-%s", var.name_prefix, "-es")
-  tags             = var.tags
-  ingress_protocol = "tcp"
-  egress_protocol  = "all"
+  egress_cidr_blocks      = var.egress_cidr_blocks
+  ingress_ports           = module.sg-ports-opensearch.ingress_ports
+  sg_name_prefix          = format("%s-%s", var.name_prefix, "-es")
+  tags                    = var.tags
+  ingress_protocol        = "tcp"
+  egress_protocol         = "all"
 }
 
 data "aws_subnet" "application_subnet" {

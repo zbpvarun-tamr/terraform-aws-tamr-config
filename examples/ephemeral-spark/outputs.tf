@@ -11,8 +11,8 @@ output "rds-pw" {
   sensitive = true
 }
 
-output "elasticsearch" {
-  value = module.tamr-es-cluster
+output "opensearch" {
+  value = module.tamr-opensearch-cluster
 }
 
 output "ec2-key" {
@@ -36,11 +36,11 @@ output "ephemeral-spark-sgs" {
   value = module.ephemeral-spark-sgs
 }
 
-output "ephemeral-spark-config" {
-  value = module.ephemeral-spark-config
-}
-
 output "tamr-config" {
   value     = module.tamr-config.rendered
   sensitive = true
+}
+
+output "aws-sg-vm" {
+  value = module.aws-sg-vm
 }
