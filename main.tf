@@ -46,7 +46,7 @@ locals {
     spark_executor_cores                    = var.spark_executor_cores,
     tamr_spark_config_override              = var.tamr_spark_config_override,
     tamr_spark_properties_override          = var.tamr_spark_properties_override,
-    es_domain_endpoint                      = var.es_domain_endpoint,                   # Elasticsearch
+    es_domain_endpoint                      = var.es_domain_endpoint, # Elasticsearch
     es_enabled                              = var.es_enabled,
     remote_es_enabled                       = var.es_domain_endpoint != "",
     es_api_host                             = var.es_domain_endpoint != "" ? "${var.es_domain_endpoint}:443" : "localhost:9200",
@@ -62,7 +62,7 @@ locals {
     tamr_backup_emr_cluster_id              = var.tamr_backup_emr_cluster_id,
     apps_dms_enabled                        = var.apps_dms_enabled, # DMS
     apps_dms_default_cloud_provider         = var.apps_dms_default_cloud_provider
-    })
+  })
 }
 
 resource "local_file" "populated_config_file" {
