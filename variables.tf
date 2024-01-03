@@ -10,17 +10,6 @@ variable "rendered_config_path" {
   default     = ""
 }
 
-variable "ephemeral_spark_configured" {
-  type        = bool
-  description = "True if EMR was configured for ephemeral spark clusters."
-}
-
-variable "additional_templated_variables" {
-  type        = map(string)
-  description = "Mapping of additional Tamr variables (not included in template) to its value. If a variable name in this map defines the same key as an input variable, the value specified in this map takes precedence."
-  default     = {}
-}
-
 #
 # RDS
 #
