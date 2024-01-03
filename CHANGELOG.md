@@ -1,5 +1,10 @@
 # AWS Tamr Config Repo
 
+## v3.0.0 - January 3rd 2024
+* Changes output to tamr_config_file
+* Moves to a single `main.tf` template for the config
+* Use `templatefile` function as opposed to deprecated `template_file` data block
+
 ## v2.6.0 - September 14th 2022
 * Adds variable `emr_security_configuration` that is passed to the config `TAMR_DATASET_EMR_SECURITY_CONFIGURATION`
 
