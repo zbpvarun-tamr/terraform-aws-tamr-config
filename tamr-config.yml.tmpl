@@ -88,4 +88,6 @@ TAMR_BACKUP_EMR_CLUSTER_ID: ${tamr_backup_emr_cluster_id}
 APPS_DMS_ENABLED: ${apps_dms_enabled}
 APPS_DMS_DEFAULT_CLOUD_PROVIDER: ${apps_dms_default_cloud_provider}
 
-%{ if additional_templated_variables != "" }${additional_templated_variables}%{ endif }
+%{ for k, v in additional_templated_variables }
+${k}: ${v}
+%{ endfor }
