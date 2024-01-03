@@ -18,6 +18,7 @@ TAMR_HBASE_STORAGE_MODE: ${hbase_storage_mode}
 TAMR_HBASE_NUMBER_OF_REGIONS: ${hbase_number_of_regions}
 TAMR_HBASE_NUMBER_OF_SALT_VALUES: ${hbase_number_of_salt_values}
 
+%{ if ephemeral_spark_configured }
 # Spark
 TAMR_REMOTE_SPARK_ENABLED: true
 TAMR_JOB_SPARK_CLUSTER : emr-ephemeral
@@ -47,6 +48,7 @@ TAMR_DATASET_EMR_ROOT_VOLUME_SIZE: ${emr_root_volume_size}
 TAMR_DATASET_EMR_CLUSTER_NAME_PREFIX: ${emr_cluster_name_prefix}
 TAMR_DATASET_EMR_CLUSTER_TAGS: ${emr_cluster_tags}
 TAMR_DATASET_EMR_SECURITY_CONFIGURATION: ${emr_security_configuration}
+%{ endif }
 
 # Spark - Scale
 TAMR_JOB_SPARK_DRIVER_MEM: ${spark_driver_memory}
@@ -85,3 +87,5 @@ TAMR_BACKUP_EMR_CLUSTER_ID: ${tamr_backup_emr_cluster_id}
 # DMS Config
 APPS_DMS_ENABLED: ${apps_dms_enabled}
 APPS_DMS_DEFAULT_CLOUD_PROVIDER: ${apps_dms_default_cloud_provider}
+
+%{ if additional_templated_variables != "" }${additional_templated_variables}%{ endif }

@@ -62,6 +62,8 @@ locals {
     tamr_backup_emr_cluster_id              = var.tamr_backup_emr_cluster_id,
     apps_dms_enabled                        = var.apps_dms_enabled, # DMS
     apps_dms_default_cloud_provider         = var.apps_dms_default_cloud_provider
+    additional_templated_variables          = var.additional_templated_variables
+    ephemeral_spark_configured              = var.ephemeral_spark_configured
   })
 }
 
