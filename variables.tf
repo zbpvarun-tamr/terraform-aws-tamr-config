@@ -17,7 +17,7 @@ variable "ephemeral_spark_configured" {
 
 variable "additional_templated_variables" {
   type        = map(string)
-  description = "Mapping of additional Tamr variables (not included in template) to its value. If a variable name in this map defines the same key as an input variable, the value specified in this map takes precedence."
+  description = "Mapping of additional Tamr variables (not included in template) to its value."
   default     = {}
 }
 
