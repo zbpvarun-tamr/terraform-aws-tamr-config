@@ -1,4 +1,5 @@
-output "rendered" {
-  value       = data.template_file.tamr_config.rendered
-  description = "Rendered Tamr config"
+output "tamr_config_file" {
+  value       = local.default_tamr_config
+  description = "Rendered Tamr custom config"
+  sensitive   = true
 }

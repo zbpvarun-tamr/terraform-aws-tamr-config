@@ -2,7 +2,7 @@ module "tamr-config" {
   #   source = "git::git@github.com:Datatamer/terraform-aws-tamr-config?ref=2.3.0"
   source = "../../.."
 
-  config_template_path       = "../../../tamr-config.yml"
+  config_template_path       = "tamr-config.yml.tmpl"
   rendered_config_path       = "./rendered-config.yml"
   ephemeral_spark_configured = true
   additional_templated_variables = {
@@ -71,6 +71,6 @@ module "tamr-config" {
 resource "aws_s3_bucket_object" "upload_tamr_config" {
   bucket                 = module.s3-data.bucket_name
   key                    = "tamr/tamr-config.yml"
-  content                = module.tamr-config.rendered
+  content                = module.tamr-config.tamr_config_file
   server_side_encryption = "AES256"
 }

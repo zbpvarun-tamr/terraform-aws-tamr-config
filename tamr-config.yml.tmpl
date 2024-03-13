@@ -18,25 +18,52 @@ TAMR_HBASE_STORAGE_MODE: ${hbase_storage_mode}
 TAMR_HBASE_NUMBER_OF_REGIONS: ${hbase_number_of_regions}
 TAMR_HBASE_NUMBER_OF_SALT_VALUES: ${hbase_number_of_salt_values}
 
+%{ if ephemeral_spark_configured }
 # Spark
 TAMR_REMOTE_SPARK_ENABLED: true
-TAMR_JOB_SPARK_CLUSTER : emr
+TAMR_JOB_SPARK_CLUSTER : emr-ephemeral
 TAMR_JOB_EMR_CLUSTER_ID: ${spark_emr_cluster_id}
 TAMR_DATASET_EMR_LOG_URI: ${spark_cluster_log_uri}
+TAMR_DATASET_EMR_RELEASE: ${emr_release_label}
+TAMR_DATASET_EMR_INSTANCE_PROFILE: ${emr_instance_profile_name}
+TAMR_DATASET_EMR_SERVICE_ROLE: ${emr_service_role_name}
+TAMR_DATASET_EMR_KEY_NAME: ${emr_key_pair_name}
+TAMR_DATASET_EMR_SUBNET_ID: ${emr_subnet_id}
+TAMR_DATASET_EMR_MASTER_INSTANCE_TYPE: ${master_instance_type}
+TAMR_DATASET_EMR_MASTER_VOLUME_COUNT: ${master_ebs_volumes_count}
+TAMR_DATASET_EMR_MASTER_VOLUME_SIZE: ${master_ebs_size}
+TAMR_DATASET_EMR_MASTER_VOLUME_TYPE: ${master_ebs_type}
+TAMR_DATASET_EMR_CORE_VOLUME_COUNT: ${core_ebs_volumes_count}
+TAMR_DATASET_EMR_CORE_VOLUME_SIZE: ${core_ebs_size}
+TAMR_DATASET_EMR_CORE_VOLUME_TYPE: ${core_ebs_type}
+TAMR_DATASET_EMR_INSTANCE_COUNT: ${core_group_instance_count}
+TAMR_DATASET_EMR_INSTANCE_TYPE: ${core_instance_type}
+TAMR_DATASET_EMR_ACCESS_SECURITY_GROUP: ${emr_service_access_sg_id}
+TAMR_DATASET_EMR_MASTER_SECURITY_GROUP: ${emr_managed_master_sg_id}
+TAMR_DATASET_EMR_MASTER_SECURITY_GROUP_ADDITIONAL: ${emr_additional_master_sg_id}
+TAMR_DATASET_EMR_WORKER_SECURITY_GROUP: ${emr_managed_core_sg_id}
+TAMR_DATASET_EMR_WORKER_SECURITY_GROUP_ADDITIONAL: ${emr_additional_core_sg_id}
+TAMR_EMRFS_DYNAMO_TABLE: ${emrfs_dynamodb_table_name}
+TAMR_DATASET_EMR_ROOT_VOLUME_SIZE: ${emr_root_volume_size}
+TAMR_DATASET_EMR_CLUSTER_NAME_PREFIX: ${emr_cluster_name_prefix}
+TAMR_DATASET_EMR_CLUSTER_TAGS: ${emr_cluster_tags}
+TAMR_DATASET_EMR_SECURITY_CONFIGURATION: ${emr_security_configuration}
+%{ endif }
 
 # Spark - Scale
 TAMR_JOB_SPARK_DRIVER_MEM: ${spark_driver_memory}
 TAMR_JOB_SPARK_EXECUTOR_INSTANCES: ${spark_executor_instances}
 TAMR_JOB_SPARK_EXECUTOR_MEM: ${spark_executor_memory}
 TAMR_JOB_SPARK_EXECUTOR_CORES: ${spark_executor_cores}
-TAMR_JOB_SPARK_CONFIG_OVERRIDES: '${tamr_spark_config_override}'
-TAMR_JOB_SPARK_PROPS: '${tamr_spark_properties_override}'
+TAMR_JOB_SPARK_CONFIG_OVERRIDES: "${tamr_spark_config_override}"
+TAMR_JOB_SPARK_PROPS: "${tamr_spark_properties_override}"
 
 # Elasticsearch
-TAMR_REMOTE_ES_ENABLED: true
-TAMR_ES_APIHOST: ${es_domain_endpoint}:443
+TAMR_ES_ENABLED: ${es_enabled}
+TAMR_REMOTE_ES_ENABLED: ${remote_es_enabled}
+TAMR_ES_APIHOST: ${es_api_host}
 TAMR_ES_HEALTH_CHECK_METADATA: false
-TAMR_ES_SSL_ENABLED: true
+TAMR_ES_SSL_ENABLED: ${es_ssl_enabled}
 
 # FileSystem
 TAMR_UNIFY_DATA_DIR: s3://${tamr_data_bucket}/${tamr_data_path}
@@ -60,3 +87,7 @@ TAMR_BACKUP_EMR_CLUSTER_ID: ${tamr_backup_emr_cluster_id}
 # DMS Config
 APPS_DMS_ENABLED: ${apps_dms_enabled}
 APPS_DMS_DEFAULT_CLOUD_PROVIDER: ${apps_dms_default_cloud_provider}
+
+%{ for k, v in additional_templated_variables }
+${k}: ${v}
+%{ endfor }
