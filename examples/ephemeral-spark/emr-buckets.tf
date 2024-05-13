@@ -1,7 +1,7 @@
 # Set up logs bucket with read/write permissions
 module "s3-logs" {
-  source      = "git::git@github.com:Datatamer/terraform-aws-s3.git?ref=1.3.2"
-  bucket_name = "${var.name_prefix}-logs"
+  source      = "git::git@github.com:Datatamer/terraform-aws-s3.git?ref=1.3.3"
+  bucket_name = "${local.name_prefix}-logs"
   read_write_actions = [
     "s3:PutObject",
     "s3:GetObject",
@@ -18,8 +18,8 @@ module "s3-logs" {
 
 # Set up root directory bucket
 module "s3-data" {
-  source      = "git::git@github.com:Datatamer/terraform-aws-s3.git?ref=1.3.2"
-  bucket_name = "${var.name_prefix}-data"
+  source      = "git::git@github.com:Datatamer/terraform-aws-s3.git?ref=1.3.3"
+  bucket_name = "${local.name_prefix}-data"
   read_write_actions = [
     "s3:GetBucketLocation",
     "s3:GetBucketCORS",

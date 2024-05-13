@@ -1,0 +1,12 @@
+[
+  {
+    "Classification":"emrfs-site",
+    "Properties":{
+      "fs.s3.consistent":"false",
+      "fs.s3.maxConnections":"50000",
+      "fs.s3.enableServerSideEncryption": "true",
+      "fs.s3a.enableServerSideEncryption":"true",
+      "fs.s3.create.allowFileNameEndsWithFolderSuffix": "true"
+    }
+  }
+]
